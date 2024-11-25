@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('centros', function (Blueprint $table) {
             $table->id();
+            $table->integer('codigo')->unsigned();
+            $table->string('nombre');
+            $table->string('direccion');
+            $table->string('logotipo');
+            $table->string('responsable');
             $table->timestamps();
         });
     }

@@ -11,8 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('registros', function (Blueprint $table) {
+        Schema::create('composteras', function (Blueprint $table) {
             $table->id();
+            $table->string('QR');
+            $table->enum('tipo', [11, 22, 33]);
+            $table->bigInteger('centros_id')->unsigned()->index();
+            $table->foreign('centros_id')->references('id')->on('centros')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -22,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('registros');
+        Schema::dropIfExists('composteras');
     }
 };

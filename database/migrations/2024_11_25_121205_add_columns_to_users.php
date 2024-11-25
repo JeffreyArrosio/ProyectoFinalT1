@@ -12,7 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            //
+            $table->boolean('admin')->default(false);
+            $table->bigInteger('centros_id')->unsigned()->index();
+            $table->foreign('centros_id')->references('id')->on('centros')->onDelete('cascade');
         });
     }
 
@@ -22,7 +24,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            //
+            $table->dropColumn(['admin', 'centros_id']);
         });
     }
 };

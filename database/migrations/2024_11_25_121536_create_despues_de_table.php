@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('despues_de', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('registros_id')->unsigned()->index();
+            $table->foreign('registros_id')->references('id')->on('registros')->onDelete('cascade');
+            $table->float('nivel_llenado_final')->nullable();
+            $table->string('fotografias_finales')->nullable();
+            $table->text('observaciones_finales')->nullable();
             $table->timestamps();
         });
     }
