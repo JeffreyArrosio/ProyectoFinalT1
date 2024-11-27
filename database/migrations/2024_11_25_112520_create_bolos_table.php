@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->date('fecha_inicio');
             $table->date('fecha_fin');
+            $table->boolean('terminado')->default(false);
             $table->timestamps();
         });
     }

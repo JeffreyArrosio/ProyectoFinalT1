@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->date('fecha_inicio');
             $table->date('fecha_fin');
+            $table->boolean('terminado')->default(false);
             $table->bigInteger('bolos_id')->unsigned()->index();
             $table->foreign('bolos_id')->references('id')->on('bolos')->onDelete('cascade');
             $table->timestamps();
