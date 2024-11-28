@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('despues_de', function (Blueprint $table) {
+        Schema::create('despues_des', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('registros_id')->unsigned()->index();
             $table->foreign('registros_id')->references('id')->on('registros')->onDelete('cascade');
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('despues_de');
+        Schema::dropIfExists('despues_des');
     }
 };

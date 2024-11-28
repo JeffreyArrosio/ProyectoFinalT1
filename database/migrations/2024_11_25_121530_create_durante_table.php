@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('durante', function (Blueprint $table) {
+        Schema::create('durantes', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('registros_id')->unsigned()->index();
             $table->foreign('registros_id')->references('id')->on('registros')->onDelete('cascade');
@@ -33,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('durante');
+        Schema::dropIfExists('durantes');
     }
 };

@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\AntesDe;
 use App\Models\Registro;
-use App\Models\DespuesDe;
-use App\Models\Durante;
+use App\Queries\RegistroQuery;
+use App\Http\Requests\RegistroForm;
 use Illuminate\Http\Request;
 
 class RegistroController extends Controller
@@ -29,52 +28,22 @@ class RegistroController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(RegistroForm $request)
     {
+        $data = $request->validated();
         $registro = new Registro();
-        $antes = new AntesDe();
-        $durante = new Durante();
-        $despues = new DespuesDe();
 
         $registro->fecha_hora = now();
         $registro->inicio_ciclo = false;
-        $registro->users_id = $request->user;
-        $registro->composteras_id = $request->compostera;
+        $registro->users_id = $data->user;
+        $registro->composteras_id = $data->compostera;
         $registro->ciclos_id = 1;
         $registro->save();
 
-        $antes->registro_id = $registro->id;
-        $antes->temperatura_ambiental = $request->temperatura_ambiental;
-        $antes->temperatura_compostera = $request->temperatura_compostera;
-        $antes->nivel_llenado_inicial = $request->nivel_llenado_inicial;
-        $antes->olor = $request->olor;
-        $antes->presencia_insectos = $request->presencia_insectos;
-        $antes->humedad = $request->humedad;
-        if ($request->fotografias_iniciales) {
-            $antes->fotografias_iniciales->$request->fotografias_iniciales;
-        }
-        $antes->observaciones_iniciales = $request->observaciones_iniciales;
-
-        $durante->registro_id = $registro->id;
-        $durante->riego = $request->riego;
-        $durante->revolver = $request->revolver;
-        $durante->aporte_verde = $request->aporte_verde;
-        $durante->tipo_aporte_verde = $request->tipo_aporte_verde;
-        $durante->aporte_seco = $request->aporte_seco;
-        $durante->tipo_aporte_seco = $request->tipo_aporte_seco;
-        if ($request->fotografias_durante) {
-            $durante->fotografias_durante = $request->fotografias_durante;
-        }
-        $durante->observaciones_durante = $request->observaciones_durante;
-
-
-        $despues->registro_id = $registro->id;
-        $despues->nivel_llenado_final = $request->nivel_llenado_final;
-        if ($request->fotografias_finales) {
-            $despues->fotografias_finales = $request->fotografias_finales;
-        }
-        $despues->observaciones_finales = $request->observaciones_finales;
-
+        $antes = (new RegistroQuery())->setAntes($registro,$data);
+        $durante = (new RegistroQuery())->setDurante($registro,$data);
+        $despues = (new RegistroQuery())->setDespues($registro,$data);
+        
         $antes->save();
         $durante->save();
         $despues->save();
@@ -92,13 +61,6 @@ class RegistroController extends Controller
         // return back();
 
     }
-
-    public function addAntes(Request $request) {}
-
-    public function addDurante(Request $request) {}
-
-    public function addDespues(Request $request) {}
-
     /**
      * Display the specified resource.
      */
