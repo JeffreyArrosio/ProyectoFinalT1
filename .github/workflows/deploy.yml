@@ -17,6 +17,7 @@ jobs:
         uses: webfactory/ssh-agent@v0.5.3
         with:
           ssh-private-key: ${{ secrets.PRIVATE_KEY }}
+          ssh-passphrase: ${{ secrets.SSH_PASSPHRASE }}
 
       - name: Deploy
         run: |
@@ -32,4 +33,3 @@ jobs:
             npm run build
             sudo service php8.3-fpm reload
           EOF
-          
