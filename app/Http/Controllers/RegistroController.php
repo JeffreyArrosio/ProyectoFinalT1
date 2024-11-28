@@ -28,7 +28,25 @@ class RegistroController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $registro = new Registro();
+        $registro->fecha_hora = now();
+        $registro->inicio_ciclo = false;
+        $registro->users_id = $request->user;
+        $registro->composteras_id = $request->compostera;
+        $registro->ciclos_id = 1;
+        $registro->save();
+        return back();
+
+        // $request->merge([
+        //     'fecha_hora' => now(),
+        //     'inicio_ciclo' => false,
+        //     'users_id' => $request->user,
+        //     'composteras_id' => $request->compostera,
+        //     'ciclos_id' => 1
+        // ]);
+        // Registro::create($request->all());
+        // return back();
+
     }
 
     /**
