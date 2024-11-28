@@ -6,11 +6,33 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class User
+ *
+ * @property $id
+ * @property $name
+ * @property $email
+ * @property $email_verified_at
+ * @property $password
+ * @property $remember_token
+ * @property $created_at
+ * @property $updated_at
+ * @property $admin
+ * @property $centros_id
+ *
+ * @property Centro $centro
+ * @property Registro[] $registros
+ * @package App
+ * @mixin \Illuminate\Database\Eloquent\Builder
+ */
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
+
+    protected $perPage = 20;
 
     /**
      * The attributes that are mass assignable.
@@ -21,6 +43,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'admin',
         'centros_id'
     ];
 
@@ -45,5 +68,21 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function centro()
+    {
+        return $this->belongsTo(\App\Models\Centro::class, 'centros_id', 'id');
+    }
+    
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function registros()
+    {
+        return $this->hasMany(\App\Models\Registro::class, 'id', 'users_id');
     }
 }
