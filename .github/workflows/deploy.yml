@@ -17,10 +17,11 @@ jobs:
         uses: webfactory/ssh-agent@v0.5.3
         with:
           ssh-private-key: ${{ secrets.PRIVATE_KEY }}
+          ssh-passphrase: ${{ secrets.SSH_PASSPHRASE }}
 
       - name: Deploy
         run: |
-          ssh fana5143@200.234.231.250 -p 2222 << 'EOF'
+          ssh fana5143@161.22.45.252 -p 2222 << 'EOF'
             cd /var/www/html/ProyectoFinalT1
             git pull origin master
             composer install --no-dev --optimize-autoloader
@@ -32,4 +33,3 @@ jobs:
             npm run build
             sudo service php8.3-fpm reload
           EOF
-          
