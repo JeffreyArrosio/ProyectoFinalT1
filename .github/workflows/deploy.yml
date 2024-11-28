@@ -13,7 +13,7 @@ jobs:
       - name: Deploy
         uses: appleboy/ssh-action@v0.1.8
         with:
-          host: 161.22.45.252
+          host: 200.234.231.250
           port: 2222
           username: fana5143
           key: ${{ secrets.PRIVATE_KEY }}
