@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Registro;
 use App\Queries\RegistroQuery;
-use App\Http\Requests\RegistroForm;
+use App\Http\Requests\RegistroRequest;
 use Illuminate\Http\Request;
 
 class RegistroController extends Controller
@@ -28,21 +28,22 @@ class RegistroController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(RegistroForm $request)
+    public function store(RegistroRequest $request)
     {
         $data = $request->validated();
+        // dd($data);
         $registro = new Registro();
 
         $registro->fecha_hora = now();
         $registro->inicio_ciclo = false;
-        $registro->users_id = $data->user;
-        $registro->composteras_id = $data->compostera;
+        $registro->users_id = $data['user'];
+        $registro->composteras_id = $data['compostera'];
         $registro->ciclos_id = 1;
         $registro->save();
 
-        $antes = (new RegistroQuery())->setAntes($registro,$data);
-        $durante = (new RegistroQuery())->setDurante($registro,$data);
-        $despues = (new RegistroQuery())->setDespues($registro,$data);
+        $antes = (new RegistroQuery())->setAntes($registro,$request);
+        $durante = (new RegistroQuery())->setDurante($registro,$request);
+        $despues = (new RegistroQuery())->setDespues($registro,$request);
         
         $antes->save();
         $durante->save();

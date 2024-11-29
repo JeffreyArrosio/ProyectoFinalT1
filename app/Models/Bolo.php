@@ -11,4 +11,9 @@ class Bolo extends Model
         'fecha_fin',
         'terminado'
     ];
+
+    public function myCiclos(){
+        return $this->hasMany(Ciclo::class);
+    }
+
 }

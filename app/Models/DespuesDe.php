@@ -12,4 +12,8 @@ class DespuesDe extends Model
         'fotografias_finales',
         'observaciones_finales'
     ];
+
+    public function myRegistro(){
+        return $this->belongsTo(Registro::class);
+    }
 }

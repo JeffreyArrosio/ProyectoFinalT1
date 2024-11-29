@@ -12,7 +12,7 @@
     <form action="/registro" method="post" enctype="multipart/form-data">
         @csrf
         <label for="user">Usuario:</label>
-        <input type="text" name="user" value="{{ Auth::user()->id}}" readonly><br><br>
+        <input type="text" name="user" id="user" value="{{ Auth::user()->id}}" readonly><br><br>
 
         <label for="compostera">Compostera:</label>
         <input type="text" id="compostera" name="compostera" value="1" readonly><br><br>

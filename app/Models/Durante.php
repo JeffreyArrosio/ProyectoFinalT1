@@ -17,4 +17,8 @@ class Durante extends Model
         'fotografias_durante',
         'observaciones_durante'
     ];
+
+    public function myRegistro(){
+        return $this->belongsTo(Registro::class);
+    }
 }
