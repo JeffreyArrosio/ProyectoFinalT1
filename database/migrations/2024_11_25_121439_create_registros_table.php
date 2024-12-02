@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('registros', function (Blueprint $table) {
-            $$table->id();
+            $table->id();
             $table->dateTime('fecha_hora');
             $table->boolean('inicio_ciclo');
             $table->bigInteger('users_id')->unsigned()->index();
