@@ -10,6 +10,7 @@ export default {
         "./resources/**/*.blade.php", // Vistas Blade
         "./resources/**/*.js",        // Archivos JS
         "./resources/**/*.jsx",       // Archivos JSX
+        "./resources/views/auth/login.blade.php"
     ],
 
     theme: {
