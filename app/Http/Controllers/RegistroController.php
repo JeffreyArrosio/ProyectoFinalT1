@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Registro;
+use App\Models\Bolo;
+use App\Models\Ciclo;
+use App\Models\Compostera;
 use App\Queries\RegistroQuery;
 use App\Http\Requests\RegistroRequest;
 use Illuminate\Http\Request;
@@ -34,17 +37,39 @@ class RegistroController extends Controller
         // dd($data);
         $registro = new Registro();
 
-        $registro->fecha_hora = now();
-        $registro->inicio_ciclo = false;
+        if ($request->has('inicio_ciclo')) {
+            $registro->inicio_ciclo = true;
+            if (Compostera::where('id', $data['compostera'])
+                ->where('tipo', '11')
+                ->exists()
+            ) {
+                $bolo = new Bolo();
+                $bolo->fecha_inicio = $data['date'];
+                $bolo->fecha_fin = $data['date']->modify("+90 days");
+                $bolo->save();
+
+                $ciclo = new Ciclo();
+                $ciclo->fecha_inicio = $data['date'];
+                $ciclo->fecha_fin = $data['date']->modify("+30 days");
+                $ciclo->bolos_id = $bolo->id;
+            }
+            $ciclo = new Ciclo();
+            $ciclo->fecha_inicio = $data['date'];
+            $ciclo->fecha_fin = $data['date']->modify("+30 days");
+            $ciclo->bolos_id = 1;
+        } else {
+            $registro->inicio_ciclo = false;
+            $registro->ciclos_id = 1;
+        }
+        $registro->fecha_hora = $data['date'];
         $registro->users_id = $data['user'];
         $registro->composteras_id = $data['compostera'];
-        $registro->ciclos_id = 1;
         $registro->save();
 
-        $antes = (new RegistroQuery())->setAntes($registro,$request);
-        $durante = (new RegistroQuery())->setDurante($registro,$request);
-        $despues = (new RegistroQuery())->setDespues($registro,$request);
-        
+        $antes = (new RegistroQuery())->setAntes($registro, $request);
+        $durante = (new RegistroQuery())->setDurante($registro, $request);
+        $despues = (new RegistroQuery())->setDespues($registro, $request);
+
         $antes->save();
         $durante->save();
         $despues->save();

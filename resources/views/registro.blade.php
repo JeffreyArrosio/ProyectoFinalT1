@@ -17,6 +17,12 @@
         <label for="compostera">Compostera:</label>
         <input type="text" id="compostera" name="compostera" value="1" readonly><br><br>
 
+        <input type="checkbox" id="inicio_ciclo" name="inicio_ciclo" value="inicio">
+        <label for="inicio_ciclo">Inicio de ciclo</label><br><br>
+
+        <label for="date">Fecha de registro: </label>
+        <input type="datetime-local" id="date" name="date"><br><br>
+
         <label for="temperatura_ambiental">Temperatura Ambiental:</label>
         <input type="number" id="temperatura_ambiental" name="temperatura_ambiental"><br><br>
         @error('temperatura_ambiental')
@@ -40,7 +46,7 @@
         @error('olor')
         <span class="text-red-500">Campo mal puesto</span><br><br>
         @enderror
-    
+
         <label for="presencia_insectos">Presencia de Insectos:</label>
         <select id="presencia_insectos" name="presencia_insectos">
             <option value="no" selected disabled>No Anotado</option>
@@ -74,7 +80,7 @@
             <option value="si">Sí</option>
             <option value="no">No</option>
         </select><br><br>
-        
+
         <label for="revolver">Revolver:</label>
         <select id="revolver" name="revolver">
             <option value="no" selected disabled>No Anotado</option>
@@ -138,7 +144,10 @@
         @error('observaciones_finales')
         <span class="text-red-500">Campo mal puesto</span><br><br>
         @enderror
-        
+
+        <input type="checkbox" id="fin_ciclo" name="fin_ciclo" value="fin">
+        <label for="fin_ciclo"> Fin de ciclo</label><br><br>
+
         <button type="submit">Enviar</button>
     </form>
 </body>

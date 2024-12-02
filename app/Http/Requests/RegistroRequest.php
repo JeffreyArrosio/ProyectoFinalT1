@@ -24,8 +24,9 @@ class RegistroRequest extends Request
     public function storeRules(): array
     {
         return [
-            'user' => 'integer',
-            'compostera' => 'integer',
+            'user' => 'required|integer',
+            'compostera' => 'required|integer',
+            'date' => 'required|date_format:d-m-Y H:i:s',
             'temperatura_ambiental' => 'nullable|integer|between:1,100',
             'temperatura_compostera' => 'nullable|integer|between:1,100',
             'nivel_llenado_inicial' => 'nullable|numeric|between:0,100',
