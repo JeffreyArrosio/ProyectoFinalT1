@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('bolos', function (Blueprint $table) {
             $table->id();
             $table->date('fecha_inicio');
-            $table->date('fecha_fin');
+            $table->date('fecha_fin')->nullable();
             $table->boolean('terminado')->default(false);
             $table->timestamps();
         });
