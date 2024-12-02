@@ -19,7 +19,7 @@ return new class extends Migration
             $table->integer('temperatura_compostera')->nullable();
             $table->float('nivel_llenado_inicial')->nullable();
             $table->string('olor')->nullable();
-            $table->enum('presencia_insectos', ['si', 'no'])->nullable();
+            $table->set('presencia_insectos', ['hormigas', 'moscas','arañas','cucarachas','otros'])->nullable();
             $table->enum('humedad', ['Exceso', 'Buena', 'Defecto'])->nullable();
             $table->string('fotografias_iniciales')->nullable();
             $table->text('observaciones_iniciales')->nullable();
