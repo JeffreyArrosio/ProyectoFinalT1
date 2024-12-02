@@ -12,17 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('registros', function (Blueprint $table) {
-            $table->id();
-            $table->bigInteger('registros_id')->unsigned()->index();
-            $table->foreign('registros_id')->references('id')->on('registros')->onDelete('cascade');
-            $table->integer('temperatura_ambiental')->nullable();
-            $table->integer('temperatura_compostera')->nullable();
-            $table->float('nivel_llenado_inicial')->nullable();
-            $table->string('olor')->nullable();
-            $table->enum('presencia_insectos', ['hormigas', 'moscas', 'arañas', 'cucarachas', 'otros'])->nullable();
-            $table->enum('humedad', ['Exceso', 'Buena', 'Defecto'])->nullable();
-            $table->string('fotografias_iniciales')->nullable();
-            $table->text('observaciones_iniciales')->nullable();
+            $$table->id();
+            $table->dateTime('fecha_hora');
+            $table->boolean('inicio_ciclo');
+            $table->bigInteger('users_id')->unsigned()->index();
+            $table->foreign('users_id')->references('id')->on('users')->onDelete('cascade');
+            $table->bigInteger('composteras_id')->unsigned()->index();
+            $table->foreign('composteras_id')->references('id')->on('composteras')->onDelete('cascade');
+            $table->bigInteger('ciclos_id')->unsigned()->index();
+            $table->foreign('ciclos_id')->references('id')->on('ciclos')->onDelete('cascade');
             $table->timestamps();
         });
     }
