@@ -13,7 +13,7 @@ class CicloPolicy
      */
     public function viewAny(User $user): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -21,7 +21,7 @@ class CicloPolicy
      */
     public function view(User $user, Ciclo $ciclo): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -29,7 +29,7 @@ class CicloPolicy
      */
     public function create(User $user): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -37,7 +37,7 @@ class CicloPolicy
      */
     public function update(User $user, Ciclo $ciclo): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -45,7 +45,7 @@ class CicloPolicy
      */
     public function delete(User $user, Ciclo $ciclo): bool
     {
-        //
+        return false;
     }
 
     /**
@@ -53,7 +53,7 @@ class CicloPolicy
      */
     public function restore(User $user, Ciclo $ciclo): bool
     {
-        //
+        return false;
     }
 
     /**
@@ -61,6 +61,6 @@ class CicloPolicy
      */
     public function forceDelete(User $user, Ciclo $ciclo): bool
     {
-        //
+        return false;
     }
 }
