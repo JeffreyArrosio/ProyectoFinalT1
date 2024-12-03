@@ -62,4 +62,9 @@ class UserPolicy
     {
         return false;
     }
+
+    public function administrate(User $user)
+    {
+        return $user->admin == true;
+    }
 }
