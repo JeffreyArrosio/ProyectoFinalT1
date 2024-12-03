@@ -14,6 +14,7 @@ class Registro extends Model
         'ciclos_id'
     ];
 
+
     public function antes_registros(){
         return $this->hasMany(AntesDe::class,'registros_id');
     }
@@ -34,5 +35,6 @@ class Registro extends Model
 
     public function ciclo(){
         return $this->belongsTo(Ciclo::class,'ciclos_id');
+
     }
 }

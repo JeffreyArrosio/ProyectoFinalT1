@@ -18,7 +18,9 @@ class Durante extends Model
         'observaciones_durante'
     ];
 
+
     public function registro(){
         return $this->belongsTo(Registro::class,'registros_id');
+
     }
 }

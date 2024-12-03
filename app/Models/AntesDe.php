@@ -22,5 +22,6 @@ class AntesDe extends Model
 
     public function registro(){
         return $this->belongsTo(Registro::class,'registros_id');
+
     }
 }

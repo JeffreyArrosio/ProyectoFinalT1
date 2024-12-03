@@ -13,7 +13,9 @@ class DespuesDe extends Model
         'observaciones_finales'
     ];
 
+
     public function registro(){
         return $this->belongsTo(Registro::class,'registros_id');
+
     }
 }

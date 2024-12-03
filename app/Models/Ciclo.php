@@ -13,6 +13,7 @@ class Ciclo extends Model
         'composteras_id'
     ];
 
+
     public function bolo(){
         return $this->belongsTo(Bolo::class,'bolos_id');
     }
@@ -23,5 +24,6 @@ class Ciclo extends Model
 
     public function registros(){
         return $this->hasMany(Registro::class,'ciclos_id');
+
     }
 }
