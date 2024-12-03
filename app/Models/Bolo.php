@@ -11,4 +11,8 @@ class Bolo extends Model
         'fecha_fin',
         'terminado'
     ];
+
+    public function ciclos(){
+        return $this->hasMany(Ciclo::class,'bolos_id');
+    }
 }
