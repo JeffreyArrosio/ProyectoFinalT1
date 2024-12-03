@@ -1,10 +1,9 @@
 <?php
 
 namespace App\Models;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class AntesDe extends Model
 {
@@ -23,7 +22,5 @@ class AntesDe extends Model
 
     public function registro(){
         return $this->belongsTo(Registro::class,'registros_id');
-
     }
 }
- 

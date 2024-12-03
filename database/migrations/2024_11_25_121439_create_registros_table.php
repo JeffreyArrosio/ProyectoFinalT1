@@ -23,7 +23,7 @@ return new class extends Migration
             $table->foreign('ciclos_id')->references('id')->on('ciclos')->onDelete('cascade');
             $table->timestamps();
         });
-    } 
+    }
 
     /**
      * Reverse the migrations.

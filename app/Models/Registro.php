@@ -4,14 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\BelongsTo; 
 class Registro extends Model
 {
-    use HasFactory;
-
     protected $fillable = [
         'fecha_hora',
         'inicio_ciclo',
@@ -41,5 +35,4 @@ class Registro extends Model
     public function ciclo(){
         return $this->belongsTo(Ciclo::class,'ciclos_id');
     }
-
 }
