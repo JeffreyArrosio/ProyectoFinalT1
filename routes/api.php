@@ -18,15 +18,32 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 Route::group(['as' => 'api.'], function() {
-    Orion::resource('users', UserController::class);
     Orion::resource('centros', CentroController::class);
+    Orion::hasManyResource('centros', 'users', CentroController::class);
+    Orion::hasManyResource('centros', 'composteras', CentroController::class);
+    Orion::resource('users', UserController::class);
     Orion::resource('bolos', BoloController::class);
-    Orion::resource('registros', RegistroController::class);
-    Orion::resource('antesde', AntesDeController::class);
-    Orion::resource('durante', DuranteController::class);
-    Orion::resource('despuesde', DespuesDeController::class);
-    Orion::resource('composteras', ComposteraController::class);
+    Orion::hasManyResource('bolos', 'ciclos', BoloController::class);
     Orion::resource('ciclos', CicloController::class);
+    Orion::belongsToResource('ciclos', 'bolo', CicloController::class);
+    Orion::belongsToResource('ciclos', 'compostera', CicloController::class);
+    Orion::hasManyResource('ciclos', 'registros', CicloController::class);
+    Orion::resource('composteras', ComposteraController::class);
+    Orion::belongsToResource('composteras', 'centro', ComposteraController::class);
+    Orion::hasManyResource('composteras', 'registros', ComposteraController::class);
+    Orion::resource('registros', RegistroController::class);
+    Orion::hasManyResource('registros', 'antes_registros', RegistroController::class);
+    Orion::hasManyResource('registros', 'durante_registros', RegistroController::class);
+    Orion::hasManyResource('registros', 'despues_registros',  RegistroController::class);
+    Orion::belongsToResource('registros', 'user', RegistroController::class);
+    Orion::belongsToResource('registros', 'compostera', RegistroController::class);
+    Orion::belongsToResource('registros', 'ciclo', RegistroController::class);
+    Orion::resource('antesde', AntesDeController::class);
+    Orion::belongsToResource('antesde', 'registro', AntesDeController::class);
+    Orion::resource('durante', DuranteController::class);
+    Orion::belongsToResource('durante', 'registro', DuranteController::class);
+    Orion::resource('despuesde', DespuesDeController::class);
+    Orion::belongsToResource('despuesde', 'registro', DespuesDeController::class);
 });
 
 
