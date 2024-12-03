@@ -19,37 +19,27 @@ class Registro extends Model
         'composteras_id',
         'ciclos_id'
     ];
- 
-    public function ciclo(): BelongsTo
-    {
-        return $this->belongsTo(Ciclo::class, 'ciclos_id', 'id');
+
+    public function antes_registros(){
+        return $this->hasMany(AntesDe::class,'registros_id');
+    }
+    public function durante_registros(){
+        return $this->hasMany(Durante::class,'registros_id');
+    }
+    public function despues_registros(){
+        return $this->hasMany(DespuesDe::class,'registros_id');
     }
 
-    public function compostera(): BelongsTo
-    {
-        return $this->belongsTo(Compostera::class, 'composteras_id', 'id');
+    public function user(){
+        return $this->belongsTo(User::class,'centros_id');
     }
 
-    public function user(): BelongsTo
-    {
-        return $this->belongsTo(User::class, 'users_id', 'id');
-    }
-    
-    public function antesDe(): HasMany
-    {
-        return $this->hasMany(AntesDe::class);
+    public function compostera(){
+        return $this->belongsTo(Compostera::class,'composteras_id');
     }
 
-    public function durante(): HasMany
-    {
-        return $this->hasMany(Durante::class);
+    public function ciclo(){
+        return $this->belongsTo(Ciclo::class,'ciclos_id');
     }
-
-    public function despuesDe(): HasMany
-    {
-        return $this->hasMany(DespuesDe::class);
-    }
-
-
 
 }

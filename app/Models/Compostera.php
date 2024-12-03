@@ -9,21 +9,13 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo; 
 class Compostera extends Model
 {
-    use HasFactory;
-    protected $fillable = [
-        'QR',
-        'tipo',
-    ];
-
- 
-    public function registro(): HasMany
-    {
-        return $this->hasMany(Registro::class);
+    public function registros(){
+        return $this->hasMany(Registro::class,'composteras_id');
     }
 
-    public function centro(): BelongsTo
-    {
-        return $this->belongsTo(Centro::class, 'centros_id', 'id');
+    public function centro(){
+        return $this->belongsTo(Centro::class,'centros_id');
+
     }
 }
  

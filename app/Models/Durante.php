@@ -22,8 +22,9 @@ class Durante extends Model
         'fotografias_durante',
         'observaciones_durante'
     ];
-    public function registro(): BelongsTo
-    {
-        return $this->belongsTo(Registro::class, 'registros_id', 'id');
+
+    public function registro(){
+        return $this->belongsTo(Registro::class,'registros_id');
+
     }
 }

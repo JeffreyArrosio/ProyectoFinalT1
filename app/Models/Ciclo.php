@@ -15,23 +15,19 @@ class Ciclo extends Model
     protected $fillable = [
         'fecha_inicio',
         'fecha_fin',
-        'terminado'
+        'terminado',
+        'composteras_id'
     ];
 
-
-/**
- * Get the user that owns the Ciclo
-*
-* @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-*/
-public function bolo(): BelongsTo
-    {
-        return $this->belongsTo(Bolo::class, 'bolos_id', 'id');
+        return $this->belongsTo(Bolo::class,'bolos_id');
     }
 
-    public function registro(): HasMany
-    {
-        return $this->hasMany(Registro::class);
+    public function compostera(){
+        return $this->belongsTo(Compostera::class,'composteras_id');
+    }
+
+    public function registros(){
+        return $this->hasMany(Registro::class,'ciclos_id');
     }
 
 }

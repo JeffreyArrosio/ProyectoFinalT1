@@ -23,9 +23,13 @@ class Centro extends Model
         return $this->hasMany(Compostera::class);
     }
 
-    // Add this method if it's not working
-    public static function factory()
-    {
-        return \Database\Factories\CentroFactory::new();
+    public function users(){
+        return $this->hasMany(User::class,'centros_id');
     }
-} 
+
+    public function composteras(){
+        return $this->hasMany(Compostera::class,'centros_id');
+    }
+
+}
+

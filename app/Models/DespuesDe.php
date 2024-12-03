@@ -17,8 +17,8 @@ class DespuesDe extends Model
         'observaciones_finales'
     ];
 
-    public function registro(): BelongsTo
-    {
-        return $this->belongsTo(Registro::class, 'registros_id', 'id');
+    public function registro(){
+        return $this->belongsTo(Registro::class,'registros_id');
+
     }
 }
