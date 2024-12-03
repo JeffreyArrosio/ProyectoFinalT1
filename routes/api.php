@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\v1\RegistroController;
 use App\Http\Controllers\Api\v1\AntesDeController;
 use App\Http\Controllers\Api\v1\DuranteController;
 use App\Http\Controllers\Api\v1\DespuesDeController;
+use App\Http\Controllers\Api\v1\ComposteraController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -28,3 +29,7 @@ Route::group(['as' => 'api.'], function() {
 Route::group(['as' => 'api.'], function() {
     Orion::resource('despuesde', DespuesDeController::class);
 });
+Route::group(['as' => 'api.'], function() {
+    Orion::resource('compostera', ComposteraController::class);
+});
+
