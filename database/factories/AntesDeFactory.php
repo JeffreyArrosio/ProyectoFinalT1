@@ -18,12 +18,11 @@ class AntesDeFactory extends Factory
             'temperatura_ambiental'=>fake()->numberBetween(10, 40),
             'temperatura_compostera'=>fake()->numberBetween(10, 70),
             'nivel_llenado_inicial'=>fake()->numberBetween(10, 40),
-            'olor'=>fake()->text(fake()->numberBetween(50, 200)),  
-            'presencia_insectos'=>fake()->randomElement([ 'Si', 'No']),
+            'olor'=>fake()->text(fake()->numberBetween(50, 200)),
+            'presencia_insectos'=>fake()->randomElement([ 'hormigas','moscas','arañas','cucarachas','otros']),
             'humedad'=>fake()->randomElement(['Exceso', 'Buena', 'Defecto']),
             'fotografias_iniciales'=>fake()->url(),
             'observaciones_iniciales'=>fake()->text(fake()->numberBetween(50, 200)),
         ];
     }
 }
- 

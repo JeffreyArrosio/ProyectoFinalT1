@@ -24,17 +24,15 @@ class DatabaseSeeder extends Seeder
      */
 
 
+
+
     public function run(): void
     {
-        $composterasBolos = [1,0,0];
 
 
-            // 1.[Bolo],[],[] = [1,0,0]
-            // 2.[Bolo],[Bolo],[]
-            // 3.[Bolo],[Bolo],[Bolo]
-            // 4.[],[Bolo],[Bolo]
-            // 5.[],[],[Bolo]
 
+
+        $composterasCodigos = ['11', '22', '33'];
         $primerCentro = Centro::factory()->create([
             'codigo' => 35003630,
             'nombre' => 'San Diego De Alacala',
@@ -65,24 +63,27 @@ class DatabaseSeeder extends Seeder
                     'tipo' => $tipo,
                     'centros_id' => $centro->id
                 ]);
-            }
-            $composteras = collect($composteras);
+            };
+            // $composteras = collect($composteras);
 
         $bolos = Bolo::factory()->count(4)->create(['terminado'=>1]);
 
 
 // BOLOS TERMINADOS
-        foreach ($bolos->take(3) as $bolo) {
+        foreach ($bolos->take(3) as $indice => $bolo) {
 
             $ciclos = Ciclo::factory(3)->create([
                 'bolos_id' => $bolo->id,
+                'composteras_id' => $composteras[$indice]->id
             ]);
+
+
 
             foreach ($ciclos as $ciclo) {
                 $registros = Registro::factory(3)->create([
                     'ciclos_id' => $ciclo->id,
                     'users_id' => $users->random()->id,
-                    'composteras_id' => $composteras->random()->id,
+                    'composteras_id' =>  $composteras[$indice]->id
                 ]);
 
                 foreach ($registros as $registro) {
@@ -103,57 +104,16 @@ class DatabaseSeeder extends Seeder
 
 
 
-            // 1.[Bolo],[],[]
-            // 2.[Bolo],[Bolo],[]
-            // 3.[Bolo],[Bolo],[Bolo]
-            // 4.[],[Bolo],[Bolo]
-            // 5.[],[],[Bolo]
 
 
-            if($composterasBolos[0] == 1){
-
-// COMPOSTERA UNO OCUPADA
-            $boloComposteraUno = Bolo::factory()->create([
-                'fecha_inicio' => '2023-01-01',
-                'fecha_fin' => null,
-                'terminado' => 0
-            ]);
-
-            $ciclosComposteraUno = Ciclo::factory()->create([
-                'bolos_id' => $boloComposteraUno->id,
-            ]);
-
-            $fechas=['2023-01-01', '2023-01-15', '2023-01-30'];
-
-            foreach ($fechas as $fecha) {
-                $ciclo = Ciclo::factory()->create([
-                    'bolos_id' => $boloComposteraUno->id,
-                    'fecha_inicio' => $fecha,
-                    'fecha_fin' => null,
-                ]);
-
-                $registros = Registro::factory(3)->create([
-                    'ciclos_id' => $ciclo->id,
-                    'users_id' => $users->random()->id,
-                    'composteras_id' => $composteras->random()->id,
-                ]);
-
-                foreach ($registros as $registro) {
-                    AntesDe::factory()->create([
-                        'registros_id' => $registro->id,
-                    ]);
-
-                    Durante::factory()->create([
-                        'registros_id' => $registro->id,
-                    ]);
-
-                    DespuesDe::factory()->create([
-                        'registros_id' => $registro->id,
-                    ]);
-                }
 
 
-            }
+
+
+        // Actualizar Base de datos:           php artisan migrate:fresh --seed
+
+
+        // BOLO
 
 // CREA BOLOS RANDOM
         // foreach ($bolos as $bolo) {
@@ -188,6 +148,93 @@ class DatabaseSeeder extends Seeder
 
 
     }
+
+    function crearCompostera($fecha,$ciclos){
+
+        $bolo = Bolo::factory()->create([
+            'fecha_inicio' => $fecha,
+            'fecha_fin' => null,
+            'terminado' => 0
+        ]);
+
+
+        $fechaInicioCiclo=$fecha;
+
+        $primerCiclo = true;
+
+
+        for ($i=0; $i < $ciclos; $i++) {
+        $fechaFinDeciclo;
+        $fechaFinDeciclo = $i+1==$ciclos ? null : date('Y-m-d', strtotime($fechaInicioCiclo . ' + 30 days'));
+        $iniciodeCiclo;
+
+        $tipo;
+        if($i==0){
+            $tipo = '11';
+        } else if($i==1){
+            $tipo = '22';
+        }else if($i==2){
+            $tipo = '33';
+        }
+
+        $ciclo=Ciclo::factory()->create([
+            'bolos_id' => $bolo->id,
+            'composteras_id' => Compostera::where('tipo',$tipo)->first()->id,
+            'fecha_inicio' => $fechaInicioCiclo,
+            'fecha_fin' => $fechaFinDeciclo,
+            'terminado' => 1
+        ]);
+
+        if($i==$ciclos-1){
+            $ciclo->terminado = 0;
+            $ciclo->save();
+        }
+
+        $registros = Registro::factory(3)->create([
+            'ciclos_id' => $ciclo->id,
+            'users_id' => User::all()->random()->id,
+            'composteras_id' => Compostera::where('tipo',$tipo)->first()->id,
+            'fecha_hora' => $fechaInicioCiclo,
+        ]);
+
+        $fechasRegistros = [$fechaInicioCiclo, date('Y-m-d', strtotime($fechaInicioCiclo . ' + 15 days')), date('Y-m-d', strtotime($fechaInicioCiclo . ' + 30 days'))];
+
+        foreach ($registros as $indice => $registro) {
+                $registro->fecha_hora = $fechasRegistros[$indice];
+                $registro->inicio_ciclo = 0;
+                $registro->save();
+        };
+        if($i==0){
+            $registros[0]->inicio_ciclo = 1;
+        }
+
+        foreach ($registros as $indice => $registro) {
+            AntesDe::factory()->create([
+                'registros_id' => $registro->id,
+            ]);
+
+            Durante::factory()->create([
+                'registros_id' => $registro->id,
+            ]);
+
+            DespuesDe::factory()->create([
+                'registros_id' => $registro->id,
+            ]);
+        }
+        $fechaInicioCiclo = $fechaFinDeciclo;
+        }
+
     }
+
+    crearCompostera('2023-01-01',3);
+    crearCompostera('2023-02-01',2);
+    crearCompostera('2023-03-01',1);
+
+
 }
+
+
+
+
+
 }
