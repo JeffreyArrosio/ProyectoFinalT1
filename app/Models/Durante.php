@@ -4,8 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Durante extends Model
 {
+
+    use HasFactory;
     protected $fillable = [
         'registros_id',
         'riego',
@@ -20,5 +25,6 @@ class Durante extends Model
 
     public function registro(){
         return $this->belongsTo(Registro::class,'registros_id');
+
     }
 }
