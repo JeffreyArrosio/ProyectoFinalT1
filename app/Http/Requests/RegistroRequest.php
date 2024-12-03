@@ -26,7 +26,7 @@ class RegistroRequest extends Request
         return [
             'user' => 'required|integer',
             'compostera' => 'required|integer',
-            'date' => 'required|date_format:d-m-Y H:i:s',
+            'date' => 'required',
             'temperatura_ambiental' => 'nullable|integer|between:1,100',
             'temperatura_compostera' => 'nullable|integer|between:1,100',
             'nivel_llenado_inicial' => 'nullable|numeric|between:0,100',

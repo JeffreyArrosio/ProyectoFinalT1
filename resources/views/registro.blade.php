@@ -50,8 +50,11 @@
         <label for="presencia_insectos">Presencia de Insectos:</label>
         <select id="presencia_insectos" name="presencia_insectos">
             <option value="no" selected disabled>No Anotado</option>
-            <option value="si">Sí</option>
-            <option value="no">No</option>
+            <option value="hormigas">Hormigas</option>
+            <option value="moscas">Moscas</option>
+            <option value="arañas">Arañas</option>
+            <option value="cucarachas">Cucarachas</option>
+            <option value="otros">Otros</option>
         </select><br><br>
 
         <label for="humedad">Humedad:</label>
