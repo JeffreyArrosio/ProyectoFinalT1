@@ -28,9 +28,10 @@ class DatabaseSeeder extends Seeder
 
     public function run(): void
     {
+        $numeroDeCentros = 1;
 
 
-
+        // Actualizar Informacion Base de datos:         php artisan migrate:fresh --seed
 
         $composterasCodigos = ['11', '22', '33'];
         $primerCentro = Centro::factory()->create([
@@ -41,6 +42,7 @@ class DatabaseSeeder extends Seeder
             'responsable' => 'director',
         ]);
 
+
         User::factory()->create([
             'name' => 'Guille',
             'email' => 'email@gmail.com',
@@ -49,7 +51,20 @@ class DatabaseSeeder extends Seeder
             'centros_id' => $primerCentro->id
         ]);
 
-        $centros = Centro::factory()->count(3)->create();
+
+        $centros = Centro::factory()->count($numeroDeCentros)->create([
+            'nombre' => 'Majada',
+        ]);
+
+
+        User::factory()->create([
+            'name' => 'Guille2',
+            'email' => 'email2@gmail.com',
+            'password' => bcrypt('0145'),
+            'admin' => 1,
+            'centros_id' => 2,
+        ]);
+
 
         foreach ($centros as $centro) {
             $users = User::factory()->count(4)->create([
@@ -110,39 +125,7 @@ class DatabaseSeeder extends Seeder
 
 
 
-        // Actualizar Base de datos:           php artisan migrate:fresh --seed
 
-
-        // BOLO
-
-// CREA BOLOS RANDOM
-        // foreach ($bolos as $bolo) {
-        //     $ciclos = Ciclo::factory(3)->create([
-        //         'bolos_id' => $bolo->id,
-        //     ]);
-
-        //     foreach ($ciclos as $ciclo) {
-        //         $registros = Registro::factory(3)->create([
-        //             'ciclos_id' => $ciclo->id,
-        //             'users_id' => $users->random()->id,
-        //             'composteras_id' => $composteras->random()->id,
-        //         ]);
-
-        //         foreach ($registros as $registro) {
-        //             AntesDe::factory()->create([
-        //                 'registros_id' => $registro->id,
-        //             ]);
-
-        //             Durante::factory()->create([
-        //                 'registros_id' => $registro->id,
-        //             ]);
-
-        //             DespuesDe::factory()->create([
-        //                 'registros_id' => $registro->id,
-        //             ]);
-        //         }
-        //     }
-        // }
 
 
 
@@ -230,11 +213,6 @@ class DatabaseSeeder extends Seeder
     crearCompostera('2023-02-01',2);
     crearCompostera('2023-03-01',1);
 
-
 }
-
-
-
-
 
 }

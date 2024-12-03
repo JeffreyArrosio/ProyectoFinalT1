@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Pointer, Check } from 'lucide-react';
 import BotonVolver from '../components/BotonVolver';
 import { Link } from 'react-router-dom';
@@ -14,10 +14,41 @@ export default function Codigo() {
         setCode(inputCode);
         setIsValid(inputCode.length === 2);
     };
+
+    const [datos, setDatos] = useState([]);
+
+    useEffect(() => {
+        fetch('http://proyectofinalt1.test/api/compostera')
+            .then(response => response.json())
+            .then(data => {
+                console.log(data); // Aquí puedes ver la respuesta del servidor
+                setDatos(data);
+            });
+    }, []);
+
+
     return (
         <div className="min-h-screen bg-green-100 flex items-center justify-center">
             <div className="p-4 space-y-4">
-                <div className="bg-white border border-green-300 rounded-lg p-4 shadow-sm">
+
+{/* Mostrar composteras por api */}
+        {datos && datos.data && datos.data.map((dato, index) => (
+        <div key={index} className="bg-white border border-green-300 rounded-lg p-4 shadow-sm">
+            <label className="block text-green-700 mb-2">
+            Compostera {dato.tipo}
+            </label>
+            <div className="flex items-center justify-center">
+            <Link to={`/hacerregistro/${dato.id}`}>
+            <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+                Selecionar
+            </button>
+            </Link>
+            </div>
+        </div>
+        ))}
+
+{/* SELECIONAR COMPOSTERA */}
+                {/* <div className="bg-white border border-green-300 rounded-lg p-4 shadow-sm">
                     <label className="block text-green-700 mb-2">
                         Insertar Código de Compostera
                     </label>
@@ -39,11 +70,11 @@ export default function Codigo() {
                         </div>
                     )}
                     <div className="flex items-center justify-center">
-                    <Link to={`/hacerregistro/${code}`}>
-                        <BotonVerde texto="Continuar" />
-                    </Link>
+                        <Link to={`/hacerregistro/${code}`}>
+                            <BotonVerde texto="Continuar" />
+                        </Link>
                     </div>
-                </div>
+                </div> */}
 
             </div>
             <BotonVolver />

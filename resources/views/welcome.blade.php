@@ -10,10 +10,10 @@
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
 
-        
+
         @viteReactRefresh
         @vite(['resources/js/app.jsx', 'resources/css/app.css'])     <!-- Esto injecta el js -->
-</head> 
+</head>
     <div id="app"></div>
     <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
 </html>
