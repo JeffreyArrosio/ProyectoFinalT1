@@ -15,4 +15,12 @@ class Centro extends Model
         return $this->hasMany(Compostera::class);
     }
 
+    public function users(){
+        return $this->hasMany(User::class,'centros_id');
+    }
+
+    public function composteras(){
+        return $this->hasMany(Compostera::class,'centros_id');
+    }
+
 }

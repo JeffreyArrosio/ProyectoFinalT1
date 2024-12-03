@@ -6,13 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Compostera extends Model
 {
-    //
-    public function myRegistros(){
-        return $this->hasMany(Registro::class);
+
+    public function registros(){
+        return $this->hasMany(Registro::class,'composteras_id');
     }
 
-    public function myCentro(){
-        return $this->belongsTo(Centro::class);
+    public function centro(){
+        return $this->belongsTo(Centro::class,'centros_id');
+
     }
 }
 

@@ -43,7 +43,6 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'admin',
         'centros_id'
     ];
 
