@@ -13,7 +13,7 @@ class ComposteraPolicy
      */
     public function viewAny(User $user): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -21,7 +21,7 @@ class ComposteraPolicy
      */
     public function view(User $user, Compostera $compostera): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -29,7 +29,7 @@ class ComposteraPolicy
      */
     public function create(User $user): bool
     {
-        //
+        return false;
     }
 
     /**
@@ -37,7 +37,7 @@ class ComposteraPolicy
      */
     public function update(User $user, Compostera $compostera): bool
     {
-        //
+        return false;
     }
 
     /**
@@ -45,7 +45,7 @@ class ComposteraPolicy
      */
     public function delete(User $user, Compostera $compostera): bool
     {
-        //
+        return false;
     }
 
     /**
@@ -53,7 +53,7 @@ class ComposteraPolicy
      */
     public function restore(User $user, Compostera $compostera): bool
     {
-        //
+        return false;
     }
 
     /**
@@ -61,6 +61,6 @@ class ComposteraPolicy
      */
     public function forceDelete(User $user, Compostera $compostera): bool
     {
-        //
+        return false;
     }
 }

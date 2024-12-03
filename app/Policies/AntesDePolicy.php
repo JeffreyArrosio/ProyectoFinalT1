@@ -13,7 +13,7 @@ class AntesDePolicy
      */
     public function viewAny(User $user): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -21,7 +21,7 @@ class AntesDePolicy
      */
     public function view(User $user, AntesDe $antesDe): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -29,7 +29,7 @@ class AntesDePolicy
      */
     public function create(User $user): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -37,7 +37,7 @@ class AntesDePolicy
      */
     public function update(User $user, AntesDe $antesDe): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -45,7 +45,7 @@ class AntesDePolicy
      */
     public function delete(User $user, AntesDe $antesDe): bool
     {
-        //
+        return false;
     }
 
     /**
@@ -53,7 +53,7 @@ class AntesDePolicy
      */
     public function restore(User $user, AntesDe $antesDe): bool
     {
-        //
+        return false;
     }
 
     /**
@@ -61,6 +61,6 @@ class AntesDePolicy
      */
     public function forceDelete(User $user, AntesDe $antesDe): bool
     {
-        //
+        return false;
     }
 }

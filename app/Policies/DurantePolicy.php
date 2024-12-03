@@ -13,7 +13,7 @@ class DurantePolicy
      */
     public function viewAny(User $user): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -21,7 +21,7 @@ class DurantePolicy
      */
     public function view(User $user, Durante $durante): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -29,7 +29,7 @@ class DurantePolicy
      */
     public function create(User $user): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -37,7 +37,7 @@ class DurantePolicy
      */
     public function update(User $user, Durante $durante): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -45,7 +45,7 @@ class DurantePolicy
      */
     public function delete(User $user, Durante $durante): bool
     {
-        //
+        return false;
     }
 
     /**
@@ -53,7 +53,7 @@ class DurantePolicy
      */
     public function restore(User $user, Durante $durante): bool
     {
-        //
+        return false;
     }
 
     /**
@@ -61,6 +61,6 @@ class DurantePolicy
      */
     public function forceDelete(User $user, Durante $durante): bool
     {
-        //
+        return false;
     }
 }

@@ -13,7 +13,7 @@ class CentroPolicy
      */
     public function viewAny(User $user): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -21,7 +21,7 @@ class CentroPolicy
      */
     public function view(User $user, Centro $centro): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -29,7 +29,7 @@ class CentroPolicy
      */
     public function create(User $user): bool
     {
-        //
+        return false;
     }
 
     /**
@@ -37,7 +37,7 @@ class CentroPolicy
      */
     public function update(User $user, Centro $centro): bool
     {
-        //
+        return false;
     }
 
     /**
@@ -45,7 +45,7 @@ class CentroPolicy
      */
     public function delete(User $user, Centro $centro): bool
     {
-        //
+        return false;
     }
 
     /**
@@ -53,7 +53,7 @@ class CentroPolicy
      */
     public function restore(User $user, Centro $centro): bool
     {
-        //
+        return false;
     }
 
     /**
@@ -61,6 +61,6 @@ class CentroPolicy
      */
     public function forceDelete(User $user, Centro $centro): bool
     {
-        //
+        return false;
     }
 }
