@@ -3,9 +3,15 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Ciclo extends Model
 {
+
+    use HasFactory;
+
     protected $fillable = [
         'fecha_inicio',
         'fecha_fin',
@@ -13,7 +19,6 @@ class Ciclo extends Model
         'composteras_id'
     ];
 
-    public function bolo(){
         return $this->belongsTo(Bolo::class,'bolos_id');
     }
 
@@ -24,4 +29,5 @@ class Ciclo extends Model
     public function registros(){
         return $this->hasMany(Registro::class,'ciclos_id');
     }
+
 }
