@@ -13,28 +13,37 @@ import HacerRegistro from './pages/HacerRegistro';
 import Qr from './pages/Qr';
 import Codigo from './pages/Codigo';
 import IntroducirRegistro from './pages/IntroducirRegistro';
-
+import Estadisticas from './pages/Estadisticas';
+import Sustratos from './pages/Sustratos';
+import Sustrato from './pages/Sustrato';
+import { DataProvider } from './DataContext';
 
 function App() {
 
     return (
-        <BrowserRouter>
-            <Routes>
-                <Route path="/" element={<Layout />}>
-                    <Route index element={<Home />} />
-                    <Route path="blogs" element={<Blogs />} />
-                    <Route path="contact" element={<Contact />} />
+        <DataProvider>
+            <BrowserRouter>
+                <Routes>
+                    <Route path="/" element={<Layout />}>
+                        <Route index element={<Home />} />
+                        <Route path="blogs" element={<Blogs />} />
+                        <Route path="contact" element={<Contact />} />
 
-                    <Route path="hacerregistro" element={<HacerRegistro />} />
-                    <Route path="hacerregistro/qr" element={<Qr />} />
-                    <Route path="hacerregistro/codigo" element={<Codigo />} />
-                    <Route path="hacerregistro/:code" element={<IntroducirRegistro />} />
-                    
-                    <Route path="*" element={<NoPage />} />
-                </Route>
-                <Route path="/login" element={<Login />} />
-            </Routes>
-        </BrowserRouter>
+                        <Route path="hacerregistro" element={<HacerRegistro />} />
+                        <Route path="hacerregistro/qr" element={<Qr />} />
+                        <Route path="hacerregistro/codigo" element={<Codigo />} />
+                        <Route path="hacerregistro/:code" element={<IntroducirRegistro />} />
+
+                        <Route path="estadisticas" element={<Estadisticas />} />
+                        <Route path="estadisticas/sustratos" element={<Sustratos />} />
+                        <Route path="estadisticas/sustratos/:code" element={<Sustrato />} />
+
+                        <Route path="*" element={<NoPage />} />
+                    </Route>
+                    <Route path="/login" element={<Login />} />
+                </Routes>
+            </BrowserRouter>
+        </DataProvider>
     );
 }
 

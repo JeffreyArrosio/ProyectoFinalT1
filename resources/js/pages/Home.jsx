@@ -6,6 +6,7 @@ import {
     LeafyGreen,
     Settings
 } from 'lucide-react';
+
 import { Link } from 'react-router-dom';
 export default function Home() {
 
@@ -21,15 +22,20 @@ export default function Home() {
                         Hacer Registro
                     </button></Link>
 
-                <button className={buttonStyle}>
-                    <Calendar className={iconStyle} size={24} />
-                    Agenda
-                </button>
+                <Link to="/agenda">
+                    <button className={buttonStyle}>
+                        <Calendar className={iconStyle} size={24} />
+                        Agenda
+                    </button>
+                </Link>
 
-                <button className={buttonStyle}>
-                    <BarChart3 className={iconStyle} size={24} />
-                    Estadísticas
-                </button>
+
+                <Link to="/estadisticas">
+                    <button className={buttonStyle}>
+                        <BarChart3 className={iconStyle} size={24} />
+                        Estadísticas
+                    </button>
+                </Link>
 
                 <button className={buttonStyle}>
                     <LeafyGreen className={iconStyle} size={24} />

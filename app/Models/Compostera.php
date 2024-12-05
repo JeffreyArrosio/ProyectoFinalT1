@@ -6,9 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\BelongsTo; 
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Compostera extends Model
 {
+
+    use HasFactory;
     public function registros(){
         return $this->hasMany(Registro::class,'composteras_id');
     }
@@ -18,4 +20,3 @@ class Compostera extends Model
 
     }
 }
- 

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\BelongsTo; 
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Registro extends Model
 {
     use HasFactory;
@@ -20,6 +20,8 @@ class Registro extends Model
         'ciclos_id'
     ];
 
+
+
     public function antes_registros(){
         return $this->hasMany(AntesDe::class,'registros_id');
     }
@@ -29,6 +31,7 @@ class Registro extends Model
     public function despues_registros(){
         return $this->hasMany(DespuesDe::class,'registros_id');
     }
+
 
     public function user(){
         return $this->belongsTo(User::class,'centros_id');

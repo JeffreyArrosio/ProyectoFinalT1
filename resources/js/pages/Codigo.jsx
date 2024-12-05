@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Pointer, Check } from 'lucide-react';
 import BotonVolver from '../components/BotonVolver';
 import { Link } from 'react-router-dom';
-import BotonVerde from '../components/BotonVerde';
 
 export default function Codigo() {
 
@@ -18,7 +17,7 @@ export default function Codigo() {
     const [datos, setDatos] = useState([]);
 
     useEffect(() => {
-        fetch('http://proyectofinalt1.test/api/compostera')
+        fetch('http://proyectofinalt1.test/api/composteras')
             .then(response => response.json())
             .then(data => {
                 console.log(data); // Aquí puedes ver la respuesta del servidor
@@ -30,7 +29,6 @@ export default function Codigo() {
     return (
         <div className="min-h-screen bg-green-100 flex items-center justify-center">
             <div className="p-4 space-y-4">
-
 {/* Mostrar composteras por api */}
         {datos && datos.data && datos.data.map((dato, index) => (
         <div key={index} className="bg-white border border-green-300 rounded-lg p-4 shadow-sm">
@@ -47,7 +45,7 @@ export default function Codigo() {
         </div>
         ))}
 
-{/* SELECIONAR COMPOSTERA */}
+{/* INTRODUCIR CODIGO COMPOSTERA */}
                 {/* <div className="bg-white border border-green-300 rounded-lg p-4 shadow-sm">
                     <label className="block text-green-700 mb-2">
                         Insertar Código de Compostera

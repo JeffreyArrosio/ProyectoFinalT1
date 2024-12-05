@@ -20,8 +20,9 @@ export default function IntroducirRegistro() {
 
     return (
 
-        <div className="min-h-screen bg-green-100 flex p-6 justify-center">
 
+
+        <div className="min-h-screen bg-green-100 flex p-6  items-center justify-center">
             <div className="w-full max-w-md">
 
                 {/* Tab Navigation */}
@@ -59,6 +60,7 @@ export default function IntroducirRegistro() {
                         </div>
                     )}
                 </div>
+
             </div>
             <BotonVolver />
         </div>
