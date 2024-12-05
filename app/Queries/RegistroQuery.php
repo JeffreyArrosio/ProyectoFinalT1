@@ -21,7 +21,10 @@ class RegistroQuery
         $antes->olor = $request['olor'];
         if ($request['presencia_insectos'] != 'No anotado') $antes->presencia_insectos = $request['presencia_insectos'];
         if ($request['humedad'] != 'No anotado') $antes->humedad = $request['humedad'];
-        if ($request['fotografias_iniciales']) $antes->fotografias_iniciales->$request['fotografias_iniciales'];
+        if ($request->hasFile('fotografias_iniciales')){
+            $path = $request->file('fotografias_iniciales')->store('images/antes','public');
+            $antes->fotografias_iniciales = $path;
+        } 
         $antes->observaciones_iniciales = $request['observaciones_iniciales'];
         return $antes;
     }
@@ -36,7 +39,10 @@ class RegistroQuery
         $durante->tipo_aporte_verde = $request['tipo_aporte_verde'];
         $durante->aporte_seco = $request['aporte_seco'];
         $durante->tipo_aporte_seco = $request['tipo_aporte_seco'];
-        if ($request->fotografias_durante) $durante->fotografias_durante = $request['fotografias_durante'];
+        if ($request->hasFile('fotografias_durante')){
+            $path = $request->file('fotografias_durante')->store('images/durante','public');
+            $durante->fotografias_durante = $path;
+        } 
         $durante->observaciones_durante = $request['observaciones_durante'];
         return $durante;
     }
@@ -46,7 +52,10 @@ class RegistroQuery
         $despues = new DespuesDe();
         $despues->registros_id = $registro->id;
         $despues->nivel_llenado_final = $request['nivel_llenado_final'];
-        if ($request['fotografias_finales']) $despues->fotografias_finales = $request['fotografias_finales'];
+        if ($request->hasFile('fotografias_finales')){
+            $path = $request->file('fotografias_finales')->store('images/despues','public');
+            $despues->fotografias_finales = $path;
+        } 
         $despues->observaciones_finales = $request['observaciones_finales'];
         return $despues;
     }
