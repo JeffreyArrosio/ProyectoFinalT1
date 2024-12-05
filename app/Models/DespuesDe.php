@@ -12,4 +12,10 @@ class DespuesDe extends Model
         'fotografias_finales',
         'observaciones_finales'
     ];
+
+
+    public function registro(){
+        return $this->belongsTo(Registro::class,'registros_id');
+
+    }
 }

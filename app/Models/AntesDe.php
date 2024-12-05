@@ -19,4 +19,9 @@ class AntesDe extends Model
         'fotografias_iniciales',
         'observaciones_iniciales'
     ];
+
+    public function registro(){
+        return $this->belongsTo(Registro::class,'registros_id');
+
+    }
 }
