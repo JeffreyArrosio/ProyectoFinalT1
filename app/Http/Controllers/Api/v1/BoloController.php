@@ -9,6 +9,6 @@ use Orion\Concerns\DisableAuthorization;
 
 class BoloController extends Controller
 {
-    use DisableAuthorization;
+    // use DisableAuthorization;
     protected $model = Bolo::class;
 }

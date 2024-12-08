@@ -10,7 +10,6 @@ use Orion\Http\Controllers\RelationController;
 
 class BoloCiclosController extends RelationController
 {
-    use DisableAuthorization;
     protected $model = Bolo::class;
     protected $relation = 'ciclos';
 }

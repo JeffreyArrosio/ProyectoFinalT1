@@ -9,6 +9,8 @@ use App\Http\Requests\UserRequest;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\UserCreated;   
 
 class UserController extends Controller
 {
@@ -40,14 +42,17 @@ class UserController extends Controller
     {
         // Obtener los datos validados
         $data = $request->validated();
+
     
         // Hashear la contraseña si está presente
         if ($request->filled('password')) {
+            $plainPassword = $data['password'];
             $data['password'] = Hash::make($request->input('password'));
         }
     
         // Crear el usuario con los datos procesados
-        User::create($data);
+        $user = User::create($data);
+        Mail::to($user->email)->send(new UserCreated($user, $plainPassword));
     
         return Redirect::route('users.index')
             ->with('success', 'User created successfully.');

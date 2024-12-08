@@ -10,7 +10,6 @@ use Orion\Http\Controllers\RelationController;
 
 class DespuesDeRegistroController extends RelationController
 {
-    use DisableAuthorization;
     protected $model = DespuesDe::class;
     protected $relation = 'registro';
 }

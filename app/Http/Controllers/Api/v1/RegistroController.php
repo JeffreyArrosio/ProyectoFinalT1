@@ -9,6 +9,5 @@ use Orion\Concerns\DisableAuthorization;
 
 class RegistroController extends Controller
 {
-    use DisableAuthorization;
     protected $model = Registro::class;
 }

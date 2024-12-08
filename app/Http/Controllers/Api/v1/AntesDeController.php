@@ -9,6 +9,6 @@ use Orion\Concerns\DisableAuthorization;
 
 class AntesDeController extends Controller
 {
-    use DisableAuthorization;
+    
     protected $model = AntesDe::class;
 }

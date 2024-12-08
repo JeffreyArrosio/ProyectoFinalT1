@@ -9,6 +9,6 @@ use Orion\Concerns\DisableAuthorization;
 
 class DespuesDeController extends Controller
 {
-    use DisableAuthorization;
+
     protected $model = DespuesDe::class;
 }

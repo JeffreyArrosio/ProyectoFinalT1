@@ -9,6 +9,5 @@ use Orion\Concerns\DisableAuthorization;
 
 class CicloController extends Controller
 {
-    use DisableAuthorization;
     protected $model = Ciclo::class;
 }
