@@ -7,6 +7,7 @@ export default {
         './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
         './storage/framework/views/*.php',
         './resources/views/**/*.blade.php',
+        "./resources/views/auth/login.blade.php"
     ],
 
     theme: {
@@ -16,6 +17,8 @@ export default {
             },
         },
     },
+
+    darkMode: 'class', // Asegúrate de que el modo oscuro esté habilitado
 
     plugins: [forms],
 };

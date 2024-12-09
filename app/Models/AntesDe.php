@@ -20,7 +20,8 @@ class AntesDe extends Model
         'observaciones_iniciales'
     ];
 
-    public function myRegistro(){
-        return $this->belongsTo(Registro::class);
+    public function registro(){
+        return $this->belongsTo(Registro::class,'registros_id');
+
     }
 }
