@@ -4,22 +4,21 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
             <div class="flex">
-                @if (session('token'))
-
-                <p>Token: {{ session('token') }}</p>
-
-                @endif
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
-                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
+                    <a href="{{ route('welcome') }}">
+                        <div className="flex-shrink-0">
+                            <h1 className="text-white text-lg font-bold">
+                                🌱 EcoVida
+                            </h1>
+                        </div>
                     </a>
                 </div>
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
+                    <x-nav-link :href="route('welcome')" :active="request()->routeIs('welcome')">
+                        {{ __('Home') }}
                     </x-nav-link>
                     @can('administrate', App\Models\User::class)
                     <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.*')">
@@ -42,6 +41,17 @@
                                 </svg>
                             </div>
                         </button>
+                        <span class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <x-nav-link :href="route('logout')"
+                                    onclick="event.preventDefault();
+                            this.closest('form').submit();">
+                                    {{ __('Log Out') }}
+                                </x-nav-link>
+                            </form>
+                        </span>
+
                     </x-slot>
 
                     <x-slot name="content">
@@ -78,9 +88,14 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
+            <x-responsive-nav-link :href="route('welcome')" :active="request()->routeIs('welcome')">
+                {{ __('Home') }}
             </x-responsive-nav-link>
+            @can('administrate', App\Models\User::class)
+            <x-responsive-nav-link :href="route('users.index')" :active="request()->routeIs('users.*')">
+                {{ __('Administrate') }}
+            </x-responsive-nav-link>
+            @endcan
         </div>
 
         <!-- Responsive Settings Options -->
