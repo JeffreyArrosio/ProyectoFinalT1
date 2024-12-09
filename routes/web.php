@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+})->middleware(['auth:sanctum'])->name('dashboard');
 
 Route::resource('users', UserController::class)->middleware('can:administrate,App\Models\User'); // Ruta para el CRUD de usuarios(Admin).
 
