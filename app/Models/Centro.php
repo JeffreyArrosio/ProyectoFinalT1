@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Centro extends Model
 {
+
     use HasFactory;
 
     protected $fillable = [
@@ -18,10 +19,6 @@ class Centro extends Model
         'logotipo'
     ];
 
-    public function compostera(): HasMany
-    {
-        return $this->hasMany(Compostera::class);
-    }
 
     public function users(){
         return $this->hasMany(User::class,'centros_id');
