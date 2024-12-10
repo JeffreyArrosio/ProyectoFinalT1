@@ -11,10 +11,18 @@ export default function Estadiscas() {
 
 
     const { data, setData } = useContext(DataContext);
+    const token = localStorage.getItem('authToken');
 
     useEffect(() => {
         if(!data.bolos){
-            fetch('http://proyectofinalt1.test/api/bolos?registros')
+            fetch('http://proyectofinalt1.test/api/bolos?registros',{
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                }
+            })
             .then(response => response.json())
             .then(datos => setData({...data, bolos:datos}))
             .catch(error => console.error(error));

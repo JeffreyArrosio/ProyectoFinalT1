@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Pointer, Check, Cuboid , ArrowLeft } from 'lucide-react';
+import { Pointer, Check, Cuboid, ArrowLeft } from 'lucide-react';
 import BotonVolver from '../components/BotonVolver';
 import { Link } from 'react-router-dom';
 import { DataContext } from '../DataContext';
@@ -12,6 +12,8 @@ export default function Codigo() {
     const { data, setData } = useContext(DataContext);
     const [composterasMasBolo, setComposterasMasBolo] = useState([]);
     const [cargadoTodo, setCargadoTodo] = useState(false);
+    const token = localStorage.getItem('authToken');
+
 
 
     useEffect(() => {
@@ -19,7 +21,14 @@ export default function Codigo() {
 
             try {
                 if (!data.composteras) {
-                    const response = await fetch(`${data.url}/api/composteras`);
+                    const response = await fetch(`${data.url}/api/composteras`, {
+                        method: 'GET',
+                        headers: {
+                            'Authorization': `Bearer ${token}`,
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                        }
+                    });
                     const datos = await response.json();
                     setData((prevData) => ({ ...prevData, composteras: datos }));
                 }
@@ -47,32 +56,32 @@ export default function Codigo() {
                 return <div>Cargando datos...</div>; // Mostrar un indicador de carga mientras no haya datos
             }
 
-            if(cargadoTodo){
-            let composterasMasBolo = composteras && composteras.map((compostera) => {
-                let ciclo = ciclosNoTerminados.find((ciclo) => ciclo.composteras_id == compostera.id);
-                if (ciclo) {
+            if (cargadoTodo) {
+                let composterasMasBolo = composteras && composteras.map((compostera) => {
+                    let ciclo = ciclosNoTerminados.find((ciclo) => ciclo.composteras_id == compostera.id);
+                    if (ciclo) {
 
-                    return {
-                        compostera_id: compostera.id,
-                        tipo: compostera.tipo,
-                        bolo: {
-                            ciclo_id: ciclo.id,
-                            bolo_id: ciclo.bolos_id,
-                            fecha_inicio: new Date(ciclo.fecha_inicio)
-                                .toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' }),
-                            registros: ciclo.registros
+                        return {
+                            compostera_id: compostera.id,
+                            tipo: compostera.tipo,
+                            bolo: {
+                                ciclo_id: ciclo.id,
+                                bolo_id: ciclo.bolos_id,
+                                fecha_inicio: new Date(ciclo.fecha_inicio)
+                                    .toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' }),
+                                registros: ciclo.registros
+                            }
+                        }
+                    } else {
+                        return {
+                            compostera_id: compostera.id,
+                            tipo: compostera.tipo,
                         }
                     }
-                } else {
-                    return {
-                        compostera_id: compostera.id,
-                        tipo: compostera.tipo,
-                    }
-                }
-            })
+                })
 
-            setComposterasMasBolo(composterasMasBolo);
-        }
+                setComposterasMasBolo(composterasMasBolo);
+            }
         };
 
         fetchData();
@@ -86,23 +95,24 @@ export default function Codigo() {
         let id = e.target.name;
 
         try {
-            fetch(`${data.url}/api/ciclos/${id}?descartarbolo` , {
+            fetch(`${data.url}/api/ciclos/${id}?descartarbolo`, {
                 method: 'POST',
                 headers: {
-                'Content-Type': 'application/json',
-                //   'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
                 },
                 body: JSON.stringify({
-                _method: 'PUT',
-                id: id
+                    _method: 'PUT',
+                    id: id
                 })
             })
                 .then(response => response.json())
                 .then(data => console.log(data))
                 .catch(error => console.error(error));
 
-                limpiarBolosData();
-                navigate('/hacerregistro/codigo');
+            limpiarBolosData();
+            navigate('/hacerregistro/codigo');
 
         } catch (error) {
             console.error(error);
@@ -116,19 +126,20 @@ export default function Codigo() {
             fetch(`${data.url}/api/bolos?nuevobolo`, {
                 method: 'POST',
                 headers: {
-                'Content-Type': 'application/json',
-                //   'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
                 },
                 body: JSON.stringify({
-                _method: 'POST',
+                    _method: 'POST',
                 })
             })
                 .then(response => response.json())
                 .then(data => console.log(data))
                 .catch(error => console.error(error));
 
-                limpiarBolosData() ;
-                navigate('/hacerregistro/codigo');
+            limpiarBolosData();
+            navigate('/hacerregistro/codigo');
 
         } catch (error) {
             console.error(error);
@@ -143,20 +154,21 @@ export default function Codigo() {
             fetch(`${data.url}/api/ciclos/${id}?terminarciclo`, {
                 method: 'POST',
                 headers: {
-                'Content-Type': 'application/json',
-                //   'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
                 },
                 body: JSON.stringify({
-                _method: 'PUT',
-                id: id
+                    _method: 'PUT',
+                    id: id
                 })
             })
                 .then(response => response.json())
                 .then(data => console.log(data))
                 .catch(error => console.error(error));
 
-                limpiarBolosData() ;
-                navigate('/hacerregistro/codigo');
+            limpiarBolosData();
+            navigate('/hacerregistro/codigo');
 
         } catch (error) {
             console.error(error);
@@ -219,15 +231,15 @@ export default function Codigo() {
                         <div className="flex items-center justify-center mt-5">
                             {
                                 !compostera.bolo && compostera.tipo == '11' ? (
-                                        <button onClick={crearBolo} className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
-                                            Nuevo Sustrato
-                                        </button>
+                                    <button onClick={crearBolo} className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+                                        Nuevo Sustrato
+                                    </button>
                                 ) : (
                                     compostera.bolo &&
                                     <div>
 
                                         <Link to={`/hacerregistro/${compostera.bolo.ciclo_id && compostera.bolo.ciclo_id}`}
-                                            >
+                                        >
                                             <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
                                                 Realizar Registro
                                             </button>
@@ -236,7 +248,7 @@ export default function Codigo() {
                                         <form onSubmit={terminarCiclo} name={compostera.bolo.ciclo_id && compostera.bolo.ciclo_id}
                                             action={`/api/ciclos/${compostera.bolo.ciclo_id && compostera.bolo.ciclo_id}`}
                                             className="inline-block bg-yellow-600  hover:bg-yellow-700 text-white text-green-800 font-bold py-2 px-4 rounded ml-3">
-                                            <button  type="submit">
+                                            <button type="submit">
                                                 Terminar Ciclo
                                             </button>
                                         </form>
@@ -259,12 +271,12 @@ export default function Codigo() {
 
             </div>
             <button
-            onClick={handleBack}
-            className="fixed bottom-4 left-4 right-4 flex items-center justify-center py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
-        >
-            <ArrowLeft className= "mr-3" size={24} />
-            Volver
-        </button>
+                onClick={handleBack}
+                className="fixed bottom-4 left-4 right-4 flex items-center justify-center py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
+            >
+                <ArrowLeft className="mr-3" size={24} />
+                Volver
+            </button>
         </div>
     );
 }
