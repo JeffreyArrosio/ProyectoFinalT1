@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\v1;
 
 use Orion\Http\Controllers\Controller;
 use App\Models\Bolo;
+use App\Models\Ciclo;
 use Orion\Concerns\DisableAuthorization;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,6 @@ class BoloController extends Controller
 {
     use DisableAuthorization;
     protected $model = Bolo::class;
-
 
     public function index(Request $request)
     {
@@ -33,5 +33,34 @@ class BoloController extends Controller
             return response()->json($bolos);
         }
     }
+
+    public function store(Request $request)
+    {
+        if ($request->has('nuevobolo')) {
+
+            if(!Ciclo::where('terminado', 0 )->where('composteras_id', 1)->exists()){
+                $bolo = new Bolo();
+            $timeNow = now();
+            if($request->has('fecha_inicio')) {
+                $bolo->fecha_inicio = $request->input('fecha_inicio');
+            }else{
+                $bolo->fecha_inicio =$timeNow;
+            }
+            $bolo->save();
+
+            $ciclo = new Ciclo();
+            $ciclo->bolos_id = $bolo->id;
+            $ciclo->fecha_inicio = $timeNow;
+            $ciclo->composteras_id = 1;
+
+            $ciclo->save();
+
+            return response()->json($ciclo);
+            }else{
+                return response()->json(['message' => 'La compostera esta ocupada']);
+            }
+        }
+    }
+
 
 }

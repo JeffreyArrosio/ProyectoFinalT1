@@ -89,7 +89,9 @@ class DatabaseSeeder extends Seeder
 
             $ciclos = Ciclo::factory(3)->create([
                 'bolos_id' => $bolo->id,
-                'composteras_id' => $composteras[$indice]->id
+                'composteras_id' => $composteras[$indice]->id,
+                'terminado' => 1
+
             ]);
 
 
@@ -116,17 +118,6 @@ class DatabaseSeeder extends Seeder
                 }
             }
         }
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -211,7 +202,7 @@ class DatabaseSeeder extends Seeder
 
     crearCompostera('2023-01-01',3);
     crearCompostera('2023-02-01',2);
-    crearCompostera('2023-03-01',1);
+    // crearCompostera('2023-03-01',1);
 
 }
 

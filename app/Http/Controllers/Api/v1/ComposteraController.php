@@ -11,4 +11,7 @@ class ComposteraController extends Controller
 {
     use DisableAuthorization;
     protected $model = Compostera::class;
+
+
 }
+

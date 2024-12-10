@@ -5,39 +5,30 @@ import { Link } from 'react-router-dom';
 import { useFetch } from '../utils/useFetch';
 import { DataContext } from '../DataContext';
 
+
 export default function Estadisticas() {
     const buttonStyle = "w-full flex items-center justify-center px-4 py-3 mb-3 bg-white border border-green-300 rounded-lg shadow-sm text-green-700 hover:bg-green-50 transition-colors ";
     const iconStyle = "mr-3";
 
     const { data, setData } = useContext(DataContext);
-    const [isLoading, setIsLoading] = useState(false);
 
-    useEffect(() => {
-        setData(null);
-      }, []);
+    // useEffect(() => {
+    //     if(!data.bolos){
+    //         fetch('http://proyectofinalt1.test/api/bolos?registros')
+    //         .then(response => response.json())
+    //         .then(datos => setData({bolos:datos}))
+    //         .catch(error => console.error(error));
+    //     }
+    // }, []);
 
-    // const response = useFetch("http://proyectofinalt1.test/api/bolos?registros");
-    // console.log(response.data);
-
-
-    if(!data){
-        console.log(data);
-
-        const { dataRecive, loading, error} = useFetch("http://proyectofinalt1.test/api/bolos?registros");
-        console.log(dataRecive);
-
-        if(loading)return <div>Loading...</div>;
-        if(error)return <div>Error fetching data</div>;
-
-    }
-
+    const bolos = data.bolos;
 
 
     return (
         <div className="min-h-screen bg-green-100 flex items-center justify-center">
-            <div className="p-4 space-y-4 w-full">
-                {/* {loading && <div>Loading...</div>}
-                {data && data.map((bolosData) => (
+            <div className="p-4 space-y-4 w-full mt-16 mb-16 ">
+                {!bolos && <div>Loading...</div>}
+                {bolos && bolos.map((bolosData) => (
                     <Link to={`/estadisticas/sustratos/${bolosData.id}`}>
                         <div className="bg-white border border-green-300 rounded-lg p-4 shadow-sm flex justify-between w-full">
                             <div className="text-green-600 text-center">
@@ -52,7 +43,7 @@ export default function Estadisticas() {
                             </div>
                         </div>
                     </Link>
-                ))} */}
+                ))}
 
                 <button className={buttonStyle}>
                     <Vegan className={iconStyle} size={24} />

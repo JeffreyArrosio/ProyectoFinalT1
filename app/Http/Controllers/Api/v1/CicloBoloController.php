@@ -13,4 +13,7 @@ class CicloBoloController extends RelationController
     use DisableAuthorization;
     protected $model = Ciclo::class;
     protected $relation = 'bolo';
+
+
+
 }

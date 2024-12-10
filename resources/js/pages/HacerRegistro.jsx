@@ -12,7 +12,7 @@ export default function HacerRegistro() {
 
     return (
         <div className="min-h-screen bg-green-100 flex items-center justify-center">
-            <div className="p-4 space-y-4 w-full">
+            <div className="p-4 space-y-4 w-full ">
 
                 <Link to="/hacerregistro/qr">
                     <button className={buttonStyle}>
