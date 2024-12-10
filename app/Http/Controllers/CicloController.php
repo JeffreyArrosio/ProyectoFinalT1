@@ -58,8 +58,11 @@ class CicloController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Ciclo $ciclo)
+    public function destroy($ciclo)
     {
-        //
+        // Código para eliminar el ciclo
+        $ciclo = Ciclo::findOrFail($ciclo);
+        $ciclo->delete();
+        return response()->json(['message' => 'Ciclo eliminado con éxito']);
     }
 }

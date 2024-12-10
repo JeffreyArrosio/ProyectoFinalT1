@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bolo;
+use App\Models\Ciclo;
 use Illuminate\Http\Request;
+
 
 class BoloController extends Controller
 {
@@ -28,7 +30,23 @@ class BoloController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // if ($request->has('nuevobolo')) {
+        //     $bolo = new Bolo();
+        //     if($request->has('fecha_inicio')) {
+        //         $bolos->fecha_inicio = $request->input('fecha_inicio');
+        //     }else{
+        //         $bolos->fecha_inicio = now();
+        //     }
+        //     $bolo->save();
+
+        //     $ciclo = new Ciclo();
+        //     $ciclo->bolo_id = $bolo->id;
+        //     $ciclo->composteras_id = 1;
+
+        //     $ciclo->save();
+
+        //     return response()->json($bolos);
+        }
     }
 
     /**

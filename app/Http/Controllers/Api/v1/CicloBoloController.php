@@ -12,4 +12,7 @@ class CicloBoloController extends RelationController
 {
     protected $model = Ciclo::class;
     protected $relation = 'bolo';
+
+
+
 }

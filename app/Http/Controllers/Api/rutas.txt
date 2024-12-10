@@ -1,0 +1,12 @@
+
+
+BolosController:
+
+
+Bolos Terminados:
+http://proyectofinalt1.test/api/bolos/terminados
+http://proyectofinalt1.test/api/bolos/compostando
+http://proyectofinalt1.test/api/bolos/ciclos
+
+
+
