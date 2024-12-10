@@ -22,6 +22,18 @@ export default function FormularioDespues(props) {
             }
         }));
     };
+    const handlePhotoUpload = (e) => {
+        const files = Array.from(e.target.files);
+        console.log(files);
+        setData(prev => ({
+            ...prev,
+            registro: {
+                ...prev.registro,
+                ['fotografias_finales']: files[0].name
+            }
+        }));
+        console.log(data)
+    };
 
     return (
         <>
@@ -33,7 +45,7 @@ export default function FormularioDespues(props) {
 
                     <div className="grid grid-cols-2 gap-4">
                         <div>
-                        <div>
+                            <div>
                                 <label className="block text-green-700 mb-2">Nivel Llenado Final (L)</label>
                                 <input
                                     type="number"
@@ -46,26 +58,27 @@ export default function FormularioDespues(props) {
                             </div>
                         </div>
 
-                        {/* <div>
+                        <div>
                             <label className="block text-green-700 mb-2">Fotografías</label>
                             <div className="flex items-center  justify-center ">
                                 <input
                                     type="file"
-                                    multiple
+                                    name='fotografias_finales'
                                     onChange={handlePhotoUpload}
+                                    // onChange={handlePhotoUpload}
                                     className="hidden"
-                                    id="photoUpload"
-                                    accept="image/*"
+                                    id="fotografias_finales"
+                                    accept='image/*'
                                 />
                                 <label
-                                    htmlFor="photoUpload"
+                                    for="fotografias_finales"
                                     className="flex items-center cursor-pointer bg-green-100 p-2 rounded-lg text-green-700"
                                 >
                                     <Camera size={20} className="mr-2" />
                                     Subir Fotos
                                 </label>
                             </div>
-                        </div> */}
+                        </div>
 
                     </div>
 
@@ -85,14 +98,13 @@ export default function FormularioDespues(props) {
 
                     <div className="flex justify-around">
                         <button
-                        onClick={() => props.setActiveTab("Antes")}
-                        className="mt-2 p-2 text-green-800 bg-green-100 rounded-lg ">
+                            onClick={() => props.setActiveTab("Antes")}
+                            className="mt-2 p-2 text-green-800 bg-green-100 rounded-lg ">
                             Anterior
                         </button>
-
                         <button
-                        onClick={props.handleSubmit}
-                        className="mt-2 p-2 text-white font-bold  bg-green-700 rounded-lg ">
+                            onClick={props.handleSubmit}
+                            className="mt-2 p-2 text-white font-bold  bg-green-700 rounded-lg ">
                             Guardar Registro
                         </button>
                     </div>

@@ -120,21 +120,20 @@ const FormularioDurante = (props) => {
                             />
                         </div>
                     </div>
-{/*
                     <div className="grid grid-cols-2 gap-4">
                         <div className="col-span-2 " >
                             <label className="block text-green-700 mb-2">Fotografías</label>
                             <div className="flex items-center  justify-center ">
                                 <input
                                     type="file"
-                                    multiple
-                                    onChange={handlePhotoUpload}
-                                    className="hidden"
-                                    id="photoUpload"
-                                    accept="image/*"
+                                    name='fotografias_durante'
+                                    onChange={handleChange}
+                                    // onChange={handlePhotoUpload}
+                                    id="fotografias_durante"
+                                    accept='image/*'
                                 />
                                 <label
-                                    htmlFor="photoUpload"
+                                    htmlFor="fotografias_durante"
                                     className="flex items-center cursor-pointer bg-green-100 p-2 rounded-lg text-green-700"
                                 >
                                     <Camera size={20} className="mr-2" />
@@ -142,7 +141,7 @@ const FormularioDurante = (props) => {
                                 </label>
                             </div>
                         </div>
-                    </div> */}
+                    </div>
 
                     <div>
                         <label className="block text-green-700 mb-2">Observaciones Durante</label>

@@ -90,18 +90,7 @@ class RegistroController extends Controller
         $durante->save();
         $despues->save();
 
-        return view('/dashboard');
-
-        // $request->merge([
-        //     'fecha_hora' => now(),
-        //     'inicio_ciclo' => false,
-        //     'users_id' => $request->user,
-        //     'composteras_id' => $request->compostera,
-        //     'ciclos_id' => 1
-        // ]);
-        // Registro::create($request->all());
-        // return back();
-
+        return view('/hacerregistro/codigo');
     }
     /**
      * Display the specified resource.

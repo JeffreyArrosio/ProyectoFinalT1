@@ -10,7 +10,10 @@ export default defineConfig({
                 'resources/js/app.jsx',
                 'resources/css/app.css',
                 'resources/css/tailwind.css',
-                'resources/js/app.js'
+                'resources/js/app.js',
+                'storage/app/public/images/antes',
+                'storage/app/public/images/despues',
+                'storage/app/public/images/durante',
             ],
             refresh: true,
         }),

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, use } from 'react';
 import { Camera } from 'lucide-react';
 import BotonVerde from '../components/BotonVerde';
 import BotonVolver from '../components/BotonVolver';
@@ -7,10 +7,14 @@ import { DataContext } from '../DataContext';
 
 
 
-
 export default function (props) {
 
     const { data, setData } = useContext(DataContext);
+    const user = localStorage.getItem('user');
+    const url = new URL(window.location.href);
+    const pathname = url.pathname; // Obtiene "/hacerregistro/2"
+    const id = pathname.split('/').pop(); // Divide por "/" y toma el último segmento
+
 
 
     const handleChange = (e) => {
@@ -24,15 +28,7 @@ export default function (props) {
         }));
     };
 
-    // const handlePhotoUpload = (e) => {
-    //     const files = Array.from(e.target.files);
-    //     setFormData(prev => ({
-    //         ...prev,
-    //         fotografias_iniciales: files
-    //     }));
 
-
-    // };
 
     // const handleSubmit = (e) => {
     //     e.preventDefault();
@@ -48,15 +44,23 @@ export default function (props) {
                     <h2 className="text-xl font-bold text-green-700 mb-4 text-center">
                         Registro Inicial
                     </h2>
-
-                    <div className="grid grid-cols-2 gap-4 flex justify-center">
-
+                    <div className="grid grid-cols-2 gap-4">
+                        <div>
+                            <label className="block text-green-700 mb-2">Usuario</label>
+                            <input
+                                type='number'
+                                name='user'
+                                value={user}
+                                className="w-full p-2 border border-green-200 rounded-lg text-green-700"
+                                readOnly
+                            />
+                        </div>
                         <div >
                             <label className="block text-green-700 mb-2">Fecha</label>
                             <input
-                                type="date"
+                                type="datetime-local"
                                 name="fecha"
-                                value={ new Date().toISOString().split('T')[0]}
+                                // value={new Date().toISOString().split('T')[0]}
                                 onChange={handleChange}
                                 className="w-full p-2 border border-green-200 rounded-lg text-green-700"
                                 placeholder="Fecha"
@@ -64,6 +68,7 @@ export default function (props) {
                         </div>
 
                     </div>
+
 
                     <div className="grid grid-cols-2 gap-4">
 
@@ -93,7 +98,7 @@ export default function (props) {
 
                     <div className="grid grid-cols-2 gap-4">
 
-                    <div>
+                        <div>
                             <label className="block text-green-700 mb-2">Nivel Llenado Inicial</label>
                             <input
                                 type="number"
@@ -154,20 +159,20 @@ export default function (props) {
                         </div>
                     </div>
 
-                    {/* <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-2 gap-4">
                         <div className="col-span-2 " >
                             <label className="block text-green-700 mb-2">Fotografías</label>
                             <div className="flex items-center  justify-center ">
                                 <input
                                     type="file"
-                                    multiple
-                                    onChange={handlePhotoUpload}
+                                    name='fotografias_iniciales'
+                                    onChange={handleChange}
                                     className="hidden"
-                                    id="photoUpload"
-                                    accept="image/*"
+                                    id="fotografias_iniciales"
+                                    accept='image/*'
                                 />
                                 <label
-                                    htmlFor="photoUpload"
+                                    for="fotografias_iniciales"
                                     className="flex items-center cursor-pointer bg-green-100 p-2 rounded-lg text-green-700"
                                 >
                                     <Camera size={20} className="mr-2" />
@@ -175,7 +180,7 @@ export default function (props) {
                                 </label>
                             </div>
                         </div>
-                    </div> */}
+                    </div>
 
                     <div>
                         <label className="block text-green-700 mb-2">Observaciones Iniciales</label>
@@ -193,8 +198,8 @@ export default function (props) {
                     <div className="flex justify-center">
 
                         <button
-                        onClick={() => props.setActiveTab("Durante")}
-                        className="mt-2 p-2 text-green-800 bg-green-100 rounded-lg ">
+                            onClick={() => props.setActiveTab("Durante")}
+                            className="mt-2 p-2 text-green-800 bg-green-100 rounded-lg ">
                             Siguiente
                         </button>
                     </div>
