@@ -11,6 +11,7 @@ class Compostera extends Model
 {
 
     use HasFactory;
+
     public function registros(){
         return $this->hasMany(Registro::class,'composteras_id');
     }
@@ -20,3 +21,4 @@ class Compostera extends Model
 
     }
 }
+

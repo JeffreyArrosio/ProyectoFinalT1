@@ -18,7 +18,9 @@ class Bolo extends Model
         'terminado'
     ];
 
+
     public function ciclos(){
         return $this->hasMany(Ciclo::class,'bolos_id');
     }
+
 }
