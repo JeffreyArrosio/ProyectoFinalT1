@@ -10,7 +10,7 @@ use Orion\Http\Controllers\RelationController;
 
 class CicloComposteraController extends RelationController
 {
-    use DisableAuthorization;
+
     protected $model = Ciclo::class;
     protected $relation = 'compostera';
 }

@@ -10,7 +10,6 @@ use Orion\Http\Controllers\RelationController;
 
 class DuranteRegistroController extends RelationController
 {
-    use DisableAuthorization;
     protected $model = Durante::class;
     protected $relation = 'registro';
 }

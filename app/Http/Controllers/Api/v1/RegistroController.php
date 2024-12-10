@@ -20,7 +20,6 @@ use Illuminate\Http\Request;
 
 class RegistroController extends Controller
 {
-    use DisableAuthorization;
     protected $model = Registro::class;
 
     public function store(Request $request, ...$args)

@@ -10,7 +10,7 @@ use Orion\Http\Controllers\RelationController;
 
 class ComposteraRegistrosController extends RelationController
 {
-    use DisableAuthorization;
+
     protected $model = Compostera::class;
     protected $relation = 'registros';
 }

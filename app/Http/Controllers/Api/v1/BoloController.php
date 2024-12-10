@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 
 class BoloController extends Controller
 {
-    use DisableAuthorization;
+    // use DisableAuthorization;
     protected $model = Bolo::class;
 
     public function index(Request $request)

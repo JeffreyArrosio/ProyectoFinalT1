@@ -9,7 +9,7 @@ use Orion\Concerns\DisableAuthorization;
 
 class ComposteraController extends Controller
 {
-    use DisableAuthorization;
+    // use DisableAuthorization;
     protected $model = Compostera::class;
 
 

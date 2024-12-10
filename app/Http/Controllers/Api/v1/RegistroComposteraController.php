@@ -10,7 +10,6 @@ use Orion\Http\Controllers\RelationController;
 
 class RegistroComposteraController extends RelationController
 {
-    use DisableAuthorization;
     protected $model = Registro::class;
     protected $relation = 'compostera';
 }

@@ -12,7 +12,6 @@ use Illuminate\Http\Request;
 
 class CicloController extends Controller
 {
-    use DisableAuthorization;
     protected $model = Ciclo::class;
 
     public function index(Request $request)
