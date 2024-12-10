@@ -92,10 +92,12 @@ class CicloController extends Controller
 
             $ciclo = Ciclo::find($args[0]);
             $ciclo->terminado = 1;
+            $ciclo->fecha_fin = now();
             $ciclo->update();
 
             $bolo = Bolo::find($ciclo->bolos_id);
             $bolo->terminado = 1;
+            $bolo->fecha_fin = now();
             $bolo->update();
 
             return response()->json(['message' => 'Descartar Bolo']);
