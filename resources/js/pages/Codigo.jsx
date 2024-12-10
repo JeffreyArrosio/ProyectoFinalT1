@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Pointer, Check } from 'lucide-react';
 import BotonVolver from '../components/BotonVolver';
 import { Link } from 'react-router-dom';
+window.compostera = []
 
 export default function Codigo() {
 
@@ -15,21 +16,26 @@ export default function Codigo() {
         setIsValid(inputCode.length === 2);
     };
 
-    const [datos, setDatos] = useState([]);
+    const [datos, setDatos] = useState(() => {
+        const datosCompostera = sessionStorage.getItem('composteras');
+        return datosCompostera ? JSON.parse(datosCompostera) : [];
+    });
 
     useEffect(() => {
-        fetch('http://proyectofinalt1.test/api/composteras', {
-            method: 'GET',
-            headers: {
-                'Authorization': `Bearer ${token}`,
-                'Content-Type': 'application/json',
-            },
-        })
-            .then(response => response.json())
-            .then(data => {
-                console.log(data); // Aquí puedes ver la respuesta del servidor
-                setDatos(data);
-            });
+        if (datos.length == 0)
+            fetch('http://proyectofinalt1.test/api/composteras', {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                },
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data); // Aquí puedes ver la respuesta del servidor
+                    setDatos(data)
+                    sessionStorage.setItem('composteras', JSON.stringify(data))
+                });
     }, []);
 
 
@@ -40,7 +46,7 @@ export default function Codigo() {
                 {datos && datos.data && datos.data.map((dato, index) => (
                     <div key={index} className="bg-white border border-green-300 rounded-lg p-4 shadow-sm">
                         <label className="block text-green-700 mb-2">
-                            Compostera {dato.tipo}
+                            Compostera {dato.tipo}{dato.centros_id}{dato.id}
                         </label>
                         <div className="flex items-center justify-center">
                             <Link to={`/hacerregistro/${dato.id}`}>

@@ -17,6 +17,7 @@ import Estadisticas from './pages/Estadisticas';
 import Sustratos from './pages/Sustratos';
 import Sustrato from './pages/Sustrato';
 import { DataProvider } from './DataContext';
+window.compostera = []
 
 function App() {
 

@@ -33,6 +33,7 @@
         const user = document.querySelector('meta[name="user"]').getAttribute('content');
         localStorage.setItem('authToken', authToken);
         localStorage.setItem('user', user);
+        sessionStorage.clear()
     </script>
     @endif
     <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
