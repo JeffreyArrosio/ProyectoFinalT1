@@ -13,7 +13,7 @@ export default function () {
     olor: '',
     presencia_insectos: '',
     humedad: '',
-    fotografias_iniciales: [],
+    fotografias_iniciales: '',
     observaciones_iniciales: ''
   });
 
@@ -42,11 +42,6 @@ export default function () {
   return (
     <>
       <div className="space-y-4 w-full max-w-lg">
-        <form onSubmit={handleSubmit} className="bg-whiterounded-lg p-2 shadow-sm space-y-4">
-          <h2 className="text-xl font-bold text-green-700 mb-4 text-center">
-            Registro Inicial
-          </h2>
-
           <div className="grid grid-cols-2 gap-4">
             <div>
               <label className="block text-green-700 mb-2">Temp. Ambiental (°C)</label>
@@ -178,11 +173,6 @@ export default function () {
               placeholder="Observaciones iniciales..."
             ></textarea>
           </div>
-
-          <div className="flex justify-center">
-            <BotonVerde texto="Guardar Registro" type="submit" />
-          </div>
-        </form>
       </div>
       <BotonVolver />
     </>

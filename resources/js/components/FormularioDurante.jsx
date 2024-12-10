@@ -13,7 +13,7 @@ const FormularioDurante = () => {
     tipo_aporte_verde: '',
     aporte_seco: '',
     tipo_aporte_seco: '',
-    fotografias_durante: [],
+    fotografias_durante: '',
     observaciones_durante: ''
   });
 
@@ -41,11 +41,6 @@ const FormularioDurante = () => {
   return (
     <>
       <div className="space-y-4 w-full max-w-lg">
-        <form onSubmit={handleSubmit} className="bg-white p-2 shadow-sm space-y-4">
-          <h2 className="text-xl font-bold text-green-700 mb-4 text-center">
-            Registro Durante
-          </h2>
-
           <div className="grid grid-cols-2 gap-4">
             <div>
               <label className="block text-green-700 mb-2">Riego</label>
@@ -166,7 +161,6 @@ const FormularioDurante = () => {
           <div className="flex justify-center">
             <BotonVerde texto="Guardar Registro" type="submit" />
           </div>
-        </form>
       </div>
       <BotonVolver />
     </>

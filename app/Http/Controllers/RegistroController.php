@@ -90,7 +90,7 @@ class RegistroController extends Controller
         $durante->save();
         $despues->save();
 
-        return view('/dashboard');
+        return view('/welcome');
 
         // $request->merge([
         //     'fecha_hora' => now(),

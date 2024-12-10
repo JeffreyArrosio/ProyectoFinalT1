@@ -26,8 +26,6 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Layout />}>
                         <Route index element={<Home />} />
-                        <Route path="blogs" element={<Blogs />} />
-                        <Route path="contact" element={<Contact />} />
 
                         <Route path="hacerregistro" element={<HacerRegistro />} />
                         <Route path="hacerregistro/qr" element={<Qr />} />
@@ -40,7 +38,6 @@ function App() {
 
                         <Route path="*" element={<NoPage />} />
                     </Route>
-                    <Route path="/login" element={<Login />} />
                 </Routes>
             </BrowserRouter>
         </DataProvider>

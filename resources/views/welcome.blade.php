@@ -4,6 +4,12 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="auth-token" content="{{  session('token') }}">
+    @if (session('token'))
+    <meta name="user" content="{{  session('user')->id }}">
+    @endif
+
 
     <title>Ecogavia-Prueba</title>
 
@@ -21,6 +27,14 @@
     @include('layouts.navigation')
     <div id="app">
     </div>
+    @if (session('token'))
+    <script>
+        const authToken = document.querySelector('meta[name="auth-token"]').getAttribute('content');
+        const user = document.querySelector('meta[name="user"]').getAttribute('content');
+        localStorage.setItem('authToken', authToken);
+        localStorage.setItem('user', user);
+    </script>
+    @endif
     <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
 </body>
 

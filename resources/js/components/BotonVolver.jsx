@@ -12,10 +12,10 @@ export default function  BotonVolver () {
   };
 
     return (
-      
       <button 
       onClick={handleBack} 
-      className="fixed bottom-4 left-4 right-4 flex items-center justify-center py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
+      
+      className="fixed bottom-4 right-4 flex items-center justify-center py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors p-5"
     >
       <ArrowLeft className={iconStyle} size={24} />
       Volver

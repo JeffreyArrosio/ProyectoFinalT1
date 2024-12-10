@@ -29,7 +29,7 @@ class AuthenticatedSessionController extends Controller
         $user = Auth::user();
         $token = $user->createToken('auth_token')->plainTextToken;
         return redirect()->intended(route('welcome', absolute: false))
-            ->with('token', $token);
+            ->with(['token' => $token, 'user' => $user]);
     }
 
     /**

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Camera, Home } from 'lucide-react';
-import BotonVerde from './BotonVerde';
 import BotonVolver from './BotonVolver';
 
 export default function FormularioDespues() {
@@ -12,7 +11,7 @@ export default function FormularioDespues() {
     tipo_aporte_verde: '',
     aporte_seco: '',
     tipo_aporte_seco: '',
-    fotografias_final: [],
+    fotografias_final: '',
     observaciones_final: ''
   });
 
@@ -40,11 +39,6 @@ export default function FormularioDespues() {
   return (
     <>
       <div className="space-y-4 w-full max-w-lg">
-        <form onSubmit={handleSubmit} className="bg-white  rounded-lg p-2 shadow-sm space-y-4">
-          <h2 className="text-xl font-bold text-green-700 mb-4 text-center">
-            Registro Final de Compostera
-          </h2>
-
           <div className="grid grid-cols-2 gap-4">
             <div>
               <label className="block text-green-700 mb-2">Nivel Llenado Final</label>
@@ -100,11 +94,6 @@ export default function FormularioDespues() {
               placeholder="Observaciones finales del proceso..."
             ></textarea>
           </div>
-
-          <div className="flex justify-center">
-            <BotonVerde texto="Guardar Registro" type="submit" />
-          </div>
-        </form>
       </div>
       <BotonVolver />
     </>

@@ -4,6 +4,8 @@ import BotonVolver from '../components/BotonVolver';
 import FormularioAntes from '../components/FormularioAntes';
 import FormularioDurante from '../components/FormularioDurante';
 import FormularioDespues from '../components/FormularioDespues';
+import BotonVerde from '../components/BotonVerde';
+
 
 export default function IntroducirRegistro() {
 
@@ -44,23 +46,43 @@ export default function IntroducirRegistro() {
                 {/* Tab Content */}
 
                 <div className="bg-white border border-green-300 rounded-lg p-4 shadow-sm">
-                    {activeTab === 'Antes' && (
-                        <div className="text-center text-green-700">
+                    <form action="/registro" method="post" enctype="multipart/form-data">
+                        <div className={`text-center text-green-700 ${activeTab === 'Antes' ?
+                            ''
+                            :
+                            'hidden'
+                            }`} >
+                            <h2 className="text-xl font-bold text-green-700 mb-4 text-center">
+                                Registro Inicial
+                            </h2>
                             <FormularioAntes />
                         </div>
-                    )}
-                    {activeTab === 'Durante' && (
-                        <div className="text-center text-green-700">
+                        <div className={`text-center text-green-700 ${activeTab === 'Durante' ?
+                            ''
+                            :
+                            'hidden'
+                            }`} >
+                            <h2 className="text-xl font-bold text-green-700 mb-4 text-center">
+                                Registro Durante
+                            </h2>
                             <FormularioDurante />
                         </div>
-                    )}
-                    {activeTab === 'Despues' && (
-                        <div className="text-center text-green-700">
+                        <div className={`text-center text-green-700 ${activeTab === 'Despues' ?
+                            ''
+                            :
+                            'hidden'
+                            }`} >
+                            <h2 className="text-xl font-bold text-green-700 mb-4 text-center">
+                                Registro Final de Compostera
+                            </h2>
                             <FormularioDespues />
+                            <div className="flex justify-center">
+                                <BotonVerde texto="Guardar Registro" type="submit" />
+                            </div>
                         </div>
-                    )}
-                </div>
 
+                    </form>
+                </div>
             </div>
             <BotonVolver />
         </div>
