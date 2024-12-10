@@ -7,6 +7,8 @@ import FormularioDespues from '../components/FormularioDespues';
 import { DataContext } from '../DataContext';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import {  ArrowLeft } from 'lucide-react';
+
 
 
 export default function IntroducirRegistro() {
@@ -88,6 +90,12 @@ export default function IntroducirRegistro() {
         navigate('/hacerregistro/codigo');
     }
 
+    const handleBack = () => {
+        navigate('/hacerregistro/codigo'); // Navigate to previous route
+    };
+
+
+
     const tabs = ['Antes', 'Durante', 'Despues'];
 
     return (
@@ -136,7 +144,15 @@ export default function IntroducirRegistro() {
                 </form>
 
             </div>
-            <BotonVolver />
+
+            <button
+            onClick={handleBack}
+            className="fixed bottom-4 left-4 right-4 flex items-center justify-center py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
+        >
+            <ArrowLeft className="mr-3" size={24}/>
+            Volver
+        </button>
+
         </div>
     );
 

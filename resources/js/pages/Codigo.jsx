@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Pointer, Check, Cuboid } from 'lucide-react';
+import { Pointer, Check, Cuboid , ArrowLeft } from 'lucide-react';
 import BotonVolver from '../components/BotonVolver';
 import { Link } from 'react-router-dom';
 import { DataContext } from '../DataContext';
@@ -80,7 +80,7 @@ export default function Codigo() {
     // console.log(composterasMasBolo);
 
 
-    const handleSubmit = (e) => {
+    const descartarbolo = (e) => {
         e.preventDefault();
 
         let id = e.target.name;
@@ -171,6 +171,10 @@ export default function Codigo() {
         setData(eliminarBolos);
     }
 
+    const handleBack = () => {
+        navigate('/'); // Navigate to previous route
+    };
+
 
     return (
 
@@ -238,7 +242,7 @@ export default function Codigo() {
                                         </form>
 
 
-                                        <form onSubmit={handleSubmit} name={compostera.bolo.ciclo_id && compostera.bolo.ciclo_id}
+                                        <form onSubmit={descartarbolo} name={compostera.bolo.ciclo_id && compostera.bolo.ciclo_id}
                                             action={`/api/ciclos/${compostera.bolo.ciclo_id && compostera.bolo.ciclo_id}`}
                                             className="inline-block bg-red-300 hover:bg-red-700 hover:text-white text-green-800 font-bold py-2 px-4 rounded ml-3">
                                             <button type="submit">
@@ -254,7 +258,13 @@ export default function Codigo() {
                 ))}
 
             </div>
-            <BotonVolver />
+            <button
+            onClick={handleBack}
+            className="fixed bottom-4 left-4 right-4 flex items-center justify-center py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
+        >
+            <ArrowLeft className= "mr-3" size={24} />
+            Volver
+        </button>
         </div>
     );
 }

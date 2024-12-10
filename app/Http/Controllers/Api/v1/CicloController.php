@@ -88,22 +88,21 @@ class CicloController extends Controller
                     return response()->json(['message' => 'Se ha finalizado el ciclo y el bolo']);
             }
 
-
-
-            return response()->json(['message' => 'No se hizo nada']);
         }  else if($request->has('descartarbolo'))  {
 
             $ciclo = Ciclo::find($args[0]);
             $ciclo->terminado = 1;
             $ciclo->update();
-            return response()->json($ciclo);
 
             $bolo = Bolo::find($ciclo->bolos_id);
             $bolo->terminado = 1;
             $bolo->update();
 
             return response()->json(['message' => 'Descartar Bolo']);
-         }
+        }
+
+        return response()->json(['message' => 'No se hizo nada']);
+
     }
 
 }
