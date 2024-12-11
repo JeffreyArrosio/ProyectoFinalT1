@@ -17,7 +17,6 @@ use App\Models\DespuesDe;
 use Orion\Concerns\DisableAuthorization;
 use Illuminate\Http\Request;
 
-
 class RegistroController extends Controller
 {
     protected $model = Registro::class;
@@ -30,7 +29,7 @@ class RegistroController extends Controller
             $ciclo = Ciclo::find($request->ciclo_id);
             $registro = new Registro();
             $registro->inicio_ciclo = 0;
-            $registro->users_id = 1; // POR ARREGLAR
+            $registro->users_id = $request->user;
             $registro->fecha_hora = $request->fecha_hora;
             $registro->ciclos_id = $request->ciclo_id;
             $registro->composteras_id = $ciclo->composteras_id;

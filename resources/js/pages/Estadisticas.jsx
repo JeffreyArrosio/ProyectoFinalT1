@@ -15,7 +15,7 @@ export default function Estadiscas() {
 
     useEffect(() => {
         if(!data.bolos){
-            fetch('http://proyectofinalt1.test/api/bolos?registros',{
+            fetch(`${data.url}/api/bolos?registros`,{
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${token}`,

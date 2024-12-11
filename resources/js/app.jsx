@@ -17,7 +17,7 @@ import Estadisticas from './pages/Estadisticas';
 import Sustratos from './pages/Sustratos';
 import Sustrato from './pages/Sustrato';
 import { DataProvider } from './DataContext';
-
+import Ciclo from './pages/Ciclo';
 function App() {
 
     return (
@@ -37,6 +37,7 @@ function App() {
 
                         <Route path="estadisticas" element={<Estadisticas />} />
                         <Route path="estadisticas/sustratos" element={<Sustratos />} />
+                        <Route path="estadisticas/sustratos/Ciclo/:code" element={<Ciclo />} />
                         <Route path="estadisticas/sustratos/:code" element={<Sustrato />} />
 
                         <Route path="*" element={<NoPage />} />

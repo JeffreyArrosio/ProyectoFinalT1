@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 export default function Navbar(){
     return(
-        <nav className="bg-green-600 shadow-md absolute w-full">
+        <nav className="bg-green-600 shadow-md  w-full  ">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between items-center h-16">
                 {/* Logo */}

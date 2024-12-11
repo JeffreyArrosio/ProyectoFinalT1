@@ -1,12 +1,25 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
+import { ArrowLeft } from 'lucide-react';
 import { DataContext } from '../DataContext';
 import { useFetch } from '../utils/useFetch';
+import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import GraficaTemperaturas from '../components/GraficaTemperaturas ';
+
 
 
 export default function Sustrato() {
     const params = useParams();
     const { data, setData } = useContext(DataContext);
+
+    const navigate = useNavigate();
+
+
+
+    const handleBack = () => {
+        navigate('/estadisticas/sustratos');
+    }
 
 
     // console.log(data.bolos.find(item => item.id === parseInt(params.code)));
@@ -14,82 +27,104 @@ export default function Sustrato() {
     const bolo = data.bolos.find(item => item.id === parseInt(params.code));
     console.log(bolo);
 
+    let registros = bolo.ciclos.flatMap((ciclo) => {
+        return ciclo.registros
+    });
+    let valores = registros.flatMap((registro) => {
+        return {
+            fecha_hora: registro.fecha_hora,
+            temperatura_ambiental: registro.antes_registros[0].temperatura_ambiental,
+            temperatura_compostera: registro.antes_registros[0].temperatura_compostera,
+        }
+    });
+
+
+    valores = valores.sort((a, b) => {
+        return new Date(a.fecha_hora) - new Date(b.fecha_hora);
+    });
+
+    valores = valores.flatMap((registro) => {
+        return {
+            fecha_hora: registro.fecha_hora.split(' ')[0].split('-').reverse().join('/')
+            ,
+            temperatura_ambiental: registro.temperatura_ambiental,
+            temperatura_compostera: registro.temperatura_compostera,
+        }
+    })
+
+
+
+
 
     return (
-        <div className="min-h-screen bg-green-100 flex items-center justify-center ">
-            <div className="p-4 space-y-4 w-full mt-16  ">
-                <div className="bg-white border border-green-300 rounded-lg p-4 shadow-sm flex justify-between w-full">
-                    <div className="text-green-600 text-center">
+        <div className="min-h-screen bg-green-100 flex items-center justify-center mb-16 ">
+            <div className="p-4 space-y-4 w-full ">
+                <div className="bg-green-600 border border-green-300 rounded-lg p-4 shadow-sm flex justify-around  w-full mb-4  ">
+                    <div className="text-white text-center font-bold content-center">
                         <p>Sustrato {bolo.id}</p>
                     </div>
-                    <div className="text-green-600 flex-col items-center justify-center">
+                    <div className="  text-white flex-col items-center justify-center font-bold ">
                         <p>Fecha Inicio: {bolo.fecha_inicio}</p>
                         <p>Fecha Fin: {bolo.fecha_fin}</p>
                     </div>
-                    <div className="text-green-600 text-center">
+                    <div className="text-white text-center font-bold content-center">
                         <p>Terminado: {bolo.terminado ? 'Sí' : 'No'}</p>
                     </div>
                 </div>
 
+                <div className="border-green-300 rounded-lg p-4 flex justify-around  w-full mb-4  ">
+                <GraficaTemperaturas valores={valores}/>
+                </div>
+
+
+                <div className=" bg-green-100 flex items-center justify-center mb-4">
+                        <table className="table-auto w-full bg-white rounded-lg shadow-md ">
+                            <thead className="bg-green-600 text-white">
+                                <tr>
+                                    <th className="px-4 py-2">Ciclo</th>
+                                    <th className="px-4 py-2">Fecha Inicio</th>
+                                    <th className="px-4 py-2">Fecha Fin</th>
+                                    <th className="px-4 py-2">Terminado</th>
+                                    <th className="px-4 py-2">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {bolo.ciclos.map((ciclo, index) => (
+                                    <tr
+                                        key={ciclo.id}
+                                        className={`${index % 2 === 0 ? "bg-green-50" : "bg-white"
+                                            } hover:bg-green-100`}
+                                    >
+                                        <td className="border px-4 py-2 text-center">{index+1}º</td>
+                                        <td className="border px-4 py-2 text-center">{ciclo.fecha_inicio}</td>
+                                        <td className="border px-4 py-2 text-center">{ciclo.fecha_fin}</td>
+                                        <td className="border px-4 py-2 text-center">
+                                            {ciclo.terminado ? "Sí" : "No"}
+                                        </td>
+                                        <td className="border px-4 py-2 text-center">
+                                            <Link to={`/estadisticas/sustratos/Ciclo/${ciclo.id}`}>
+                                                <button className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-700">
+                                                    Ver Detalles
+                                                </button>
+                                            </Link>
+
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                </div>
+
                 {/* Ciclos */}
-                {bolo.ciclos.map((ciclo) => (
-                    <div key={ciclo.id} className="bg-white border border-green-300 rounded-lg p-4 shadow-sm w-full">
-                        <div className="text-green-600 mb-4">
-                            <p>Ciclo {ciclo.id}</p>
-                            <p>Fecha Inicio: {ciclo.fecha_inicio}</p>
-                            <p>Fecha Fin: {ciclo.fecha_fin}</p>
-                            <p>Terminado: {ciclo.terminado ? 'Sí' : 'No'}</p>
-                        </div>
-
-                        {/* Registros de cada Ciclo */}
-                        {ciclo.registros.map((registro) => (
-                            <div key={registro.id} className="bg-green-50 border border-green-200 rounded-lg p-3 mb-2">
-                                <div className="text-green-700">
-                                    <p>Registro ID: {registro.id}</p>
-                                    <p>Fecha y Hora: {registro.fecha_hora}</p>
-                                    <p>Inicio de Ciclo: {registro.inicio_ciclo ? 'Sí' : 'No'}</p>
-                                    <p>Usuario ID: {registro.users_id}</p>
-
-                                    {/* Antes Registros */}
-                                    {registro.antes_registros && registro.antes_registros.map((antes) => (
-                                        <div key={antes.id} className="mt-2 bg-white p-2 rounded">
-                                            <p className="font-bold">Antes del Registro:</p>
-                                            <p>Temperatura Ambiental: {antes.temperatura_ambiental}°C</p>
-                                            <p>Temperatura Compostera: {antes.temperatura_compostera}°C</p>
-                                            <p>Nivel Llenado Inicial: {antes.nivel_llenado_inicial}%</p>
-                                            <p>Olor: {antes.olor}</p>
-                                            <p>Presencia Insectos: {antes.presencia_insectos}</p>
-                                            <p>Humedad: {antes.humedad}</p>
-                                        </div>
-                                    ))}
-
-                                    {/* Durante Registros */}
-                                    {registro.durante_registros && registro.durante_registros.map((durante) => (
-                                        <div key={durante.id} className="mt-2 bg-white p-2 rounded">
-                                            <p className="font-bold">Durante el Registro:</p>
-                                            <p>Riego: {durante.riego}</p>
-                                            <p>Revolver: {durante.revolver}</p>
-                                            <p>Aporte Verde: {durante.aporte_verde}</p>
-                                            <p>Tipo Aporte Verde: {durante.tipo_aporte_verde}</p>
-                                            <p>Aporte Seco: {durante.aporte_seco}</p>
-                                            <p>Tipo Aporte Seco: {durante.tipo_aporte_seco}</p>
-                                        </div>
-                                    ))}
-
-                                    {/* Después Registros */}
-                                    {registro.despues_registros && registro.despues_registros.map((despues) => (
-                                        <div key={despues.id} className="mt-2 bg-white p-2 rounded">
-                                            <p className="font-bold">Después del Registro:</p>
-                                            <p>Nivel Llenado Final: {despues.nivel_llenado_final}%</p>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                ))}
-                
             </div>
+            <button
+                onClick={handleBack}
+                className="fixed bottom-4 left-4 right-4 flex items-center justify-center py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
+            >
+                <ArrowLeft className="mr-3" size={24} />
+                Volver
+            </button>
+
         </div>
     );
 }

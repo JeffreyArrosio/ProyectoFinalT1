@@ -13,6 +13,8 @@ export default function (props) {
     const { data, setData } = useContext(DataContext);
 
 
+    const user = localStorage.getItem('user');
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setData(prevData => ({
@@ -24,6 +26,20 @@ export default function (props) {
         }));
     };
 
+
+    const handlePhotoUpload = (event) => {
+
+       let img = event.target.files[0];
+
+        setData(prevData => ({
+            ...prevData,
+            registro: {
+                ...prevData.registro,
+                fotografias_iniciales: img
+            }
+        }));
+        // setImage(event.target.files[0]);
+      };
     // const handlePhotoUpload = (e) => {
     //     const files = Array.from(e.target.files);
     //     setFormData(prev => ({
@@ -50,6 +66,16 @@ export default function (props) {
                     </h2>
 
                     <div className="grid grid-cols-2 gap-4 flex justify-center">
+                    <div >
+                            <label className="block text-green-700 mb-2">Usuario</label>
+                            <input
+                                type="number"
+                                name="user"
+                                value={user}
+                                readOnly
+                                className="w-full p-2 border border-green-200 rounded-lg text-green-700"
+                            />
+                        </div>
 
                         <div >
                             <label className="block text-green-700 mb-2">Fecha</label>
@@ -154,7 +180,7 @@ export default function (props) {
                         </div>
                     </div>
 
-                    {/* <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-2 gap-4">
                         <div className="col-span-2 " >
                             <label className="block text-green-700 mb-2">Fotografías</label>
                             <div className="flex items-center  justify-center ">
@@ -175,7 +201,7 @@ export default function (props) {
                                 </label>
                             </div>
                         </div>
-                    </div> */}
+                    </div>
 
                     <div>
                         <label className="block text-green-700 mb-2">Observaciones Iniciales</label>
