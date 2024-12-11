@@ -11,9 +11,6 @@ export default function (props) {
 
     const { data, setData } = useContext(DataContext);
     const user = localStorage.getItem('user');
-    const url = new URL(window.location.href);
-    const pathname = url.pathname; // Obtiene "/hacerregistro/2"
-    const id = pathname.split('/').pop(); // Divide por "/" y toma el último segmento
 
 
 
@@ -28,6 +25,18 @@ export default function (props) {
         }));
     };
 
+    const handlePhotoUpload = (e) => {
+        const file = e.target.files[0];
+        console.log(file);
+        setData(prev => ({
+            ...prev,
+            registro: {
+                ...prev.registro,
+                ['fotografias_iniciales']: file
+            }
+        }));
+        console.log(data)
+    };
 
 
     // const handleSubmit = (e) => {
@@ -60,10 +69,9 @@ export default function (props) {
                             <input
                                 type="datetime-local"
                                 name="fecha"
-                                // value={new Date().toISOString().split('T')[0]}
                                 onChange={handleChange}
                                 className="w-full p-2 border border-green-200 rounded-lg text-green-700"
-                                placeholder="Fecha"
+                                placeholder={new Date().toISOString().split('T')[0]}
                             />
                         </div>
 
@@ -166,13 +174,13 @@ export default function (props) {
                                 <input
                                     type="file"
                                     name='fotografias_iniciales'
-                                    onChange={handleChange}
+                                    onChange={handlePhotoUpload}
                                     className="hidden"
                                     id="fotografias_iniciales"
                                     accept='image/*'
                                 />
                                 <label
-                                    for="fotografias_iniciales"
+                                    htmlFor="fotografias_iniciales"
                                     className="flex items-center cursor-pointer bg-green-100 p-2 rounded-lg text-green-700"
                                 >
                                     <Camera size={20} className="mr-2" />

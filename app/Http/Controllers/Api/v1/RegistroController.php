@@ -28,6 +28,11 @@ class RegistroController extends Controller
 
         if ($request->has('hacerregistro')) {
 
+            $request->validated([
+                'fotografias_iniciales' => ['file','image','max:2048'],
+                'fotografias_durante' => ['file','image','max:2048'],
+                'fotografias_finales' => ['file','image','max:2048'],
+            ]);
             $ciclo = Ciclo::find($request->ciclo_id);
             $registro = new Registro();
             $registro->fecha_hora = $request->fecha;

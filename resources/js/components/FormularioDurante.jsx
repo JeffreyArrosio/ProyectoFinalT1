@@ -22,13 +22,19 @@ const FormularioDurante = (props) => {
         }));
     };
 
-    // const handlePhotoUpload = (e) => {
-    //     const files = Array.from(e.target.files);
-    //     setFormData(prev => ({
-    //         ...prev,
-    //         fotografias_durante: files
-    //     }));
-    // };
+    const handlePhotoUpload = (e) => {
+        const file = e.target.files[0];
+        console.log(file);
+        setData(prev => ({
+            ...prev,
+            registro: {
+                ...prev.registro,
+                ['fotografias_durante']: file
+            }
+        }));
+        console.log(data)
+    };
+
 
 
     return (
@@ -127,8 +133,8 @@ const FormularioDurante = (props) => {
                                 <input
                                     type="file"
                                     name='fotografias_durante'
-                                    onChange={handleChange}
-                                    // onChange={handlePhotoUpload}
+                                    onChange={handlePhotoUpload}
+                                    className='hidden'
                                     id="fotografias_durante"
                                     accept='image/*'
                                 />
