@@ -137,7 +137,7 @@ DEPLOY_USER: Usuario para el acceso SSH al servidor.
 ## Usuarios:
 URL: yeray.informaticamajada.es
 Usuarios:
--Alberto: alberto@prueba.com
+-Alberto: albert@prueba.com
 -Jesus: jesus@prueba.com
 -Dani: dani@prueba.com
 -Cesar: cesar@prueba.com
