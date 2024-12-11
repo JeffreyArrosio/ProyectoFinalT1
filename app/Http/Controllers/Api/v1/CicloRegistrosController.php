@@ -10,7 +10,9 @@ use Orion\Http\Controllers\RelationController;
 
 class CicloRegistrosController extends RelationController
 {
-    use DisableAuthorization;
     protected $model = Ciclo::class;
     protected $relation = 'registros';
+
+
+
 }

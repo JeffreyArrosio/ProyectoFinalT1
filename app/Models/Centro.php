@@ -2,18 +2,23 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Centro extends Model
 {
-    public function myUsers(){
-        return $this->hasMany(User::class);
-    }
 
-    public function myComposteras(){
-        return $this->hasMany(Compostera::class);
-    }
+    use HasFactory;
+
+    protected $fillable = [
+        'codigo',
+        'nombre',
+        'direccion',
+        'responsable',
+        'logotipo'
+    ];
+
 
     public function users(){
         return $this->hasMany(User::class,'centros_id');
@@ -24,3 +29,4 @@ class Centro extends Model
     }
 
 }
+

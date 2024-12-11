@@ -10,7 +10,7 @@ use Orion\Http\Controllers\RelationController;
 
 class CentroUsersController extends RelationController
 {
-    use DisableAuthorization;
+
     protected $model = Centro::class;
     protected $relation = 'users';
 }

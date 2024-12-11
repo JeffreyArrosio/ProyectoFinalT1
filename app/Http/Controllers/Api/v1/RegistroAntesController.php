@@ -10,7 +10,7 @@ use Orion\Http\Controllers\RelationController;
 
 class RegistroAntesController extends RelationController
 {
-    use DisableAuthorization;
+
     protected $model = Registro::class;
     protected $relation = 'antes_registros';
 }

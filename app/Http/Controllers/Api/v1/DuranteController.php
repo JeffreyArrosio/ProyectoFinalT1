@@ -9,6 +9,5 @@ use Orion\Concerns\DisableAuthorization;
 
 class DuranteController extends Controller
 {
-    use DisableAuthorization;
     protected $model = Durante::class;
 }
