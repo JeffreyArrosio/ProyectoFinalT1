@@ -23,17 +23,18 @@ export default function FormularioDespues(props) {
         }));
     };
     const handlePhotoUpload = (e) => {
-        const files = Array.from(e.target.files);
-        console.log(files);
+        const file = e.target.files[0];
+        console.log(file);
         setData(prev => ({
             ...prev,
             registro: {
                 ...prev.registro,
-                ['fotografias_finales']: files[0].name
+                ['fotografias_finales']: file
             }
         }));
         console.log(data)
     };
+
 
     return (
         <>
@@ -71,7 +72,7 @@ export default function FormularioDespues(props) {
                                     accept='image/*'
                                 />
                                 <label
-                                    for="fotografias_finales"
+                                    htmlFor="fotografias_finales"
                                     className="flex items-center cursor-pointer bg-green-100 p-2 rounded-lg text-green-700"
                                 >
                                     <Camera size={20} className="mr-2" />

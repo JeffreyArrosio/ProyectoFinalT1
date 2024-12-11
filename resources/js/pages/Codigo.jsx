@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Pointer, Check, Cuboid, ArrowLeft } from 'lucide-react';
-import BotonVolver from '../components/BotonVolver';
 import { Link } from 'react-router-dom';
 import { DataContext } from '../DataContext';
 import { useNavigate } from 'react-router-dom';
+import ConfirmationModal from '../components/ConfirmationModal';
 
 
 export default function Codigo() {
@@ -13,6 +13,11 @@ export default function Codigo() {
     const [composterasMasBolo, setComposterasMasBolo] = useState([]);
     const [cargadoTodo, setCargadoTodo] = useState(false);
     const token = localStorage.getItem('authToken');
+    const [boloSeleccionado, setBoloSeleccionado] = useState();
+
+    const [isTerminarCicloModalOpen, setIsTerminarCicloModalOpen] = useState(false);
+    const [isDescartarBoloModalOpen, setIsDescartarBoloModalOpen] = useState(false);
+
 
 
 
@@ -88,11 +93,16 @@ export default function Codigo() {
     }, [cargadoTodo]);
     // console.log(composterasMasBolo);
 
-
-    const descartarbolo = (e) => {
+    const descartarBolo = (e) => {
         e.preventDefault();
+        setBoloSeleccionado(e.target.name);
+        setIsDescartarBoloModalOpen(true);
+      };
 
-        let id = e.target.name;
+    const confirmDescartarBolo  = (e) => {
+        e.preventDefault();
+        setIsDescartarBoloModalOpen(false);
+        let id = boloSeleccionado;
 
         try {
             fetch(`${data.url}/api/ciclos/${id}?descartarbolo`, {
@@ -108,11 +118,15 @@ export default function Codigo() {
                 })
             })
                 .then(response => response.json())
-                .then(data => console.log(data))
+                .then(data => {
+                    console.log(data)
+                    limpiarBolosData();
+                    navigate('/hacerregistro/codigo');
+                }
+            )
                 .catch(error => console.error(error));
 
-            limpiarBolosData();
-            navigate('/hacerregistro/codigo');
+
 
         } catch (error) {
             console.error(error);
@@ -121,6 +135,7 @@ export default function Codigo() {
     }
 
     const crearBolo = (e) => {
+
         e.preventDefault();
         try {
             fetch(`${data.url}/api/bolos?nuevobolo`, {
@@ -135,21 +150,33 @@ export default function Codigo() {
                 })
             })
                 .then(response => response.json())
-                .then(data => console.log(data))
-                .catch(error => console.error(error));
+                .then(data =>
+                    {
+                        console.log(data)
+                        limpiarBolosData();
+                        navigate('/hacerregistro/codigo');
+                    }
+                )
 
-            limpiarBolosData();
-            navigate('/hacerregistro/codigo');
+                .catch(error => console.error(error));
 
         } catch (error) {
             console.error(error);
         };
+
+
     }
-
-
     const terminarCiclo = (e) => {
         e.preventDefault();
-        let id = e.target.name;
+        setBoloSeleccionado(e.target.name);
+        setIsTerminarCicloModalOpen(true);
+      };
+
+    const confirmTerminarCiclo  = (e) => {
+        e.preventDefault();
+        setIsTerminarCicloModalOpen(false);
+        let id = boloSeleccionado;
+
         try {
             fetch(`${data.url}/api/ciclos/${id}?terminarciclo`, {
                 method: 'POST',
@@ -164,15 +191,20 @@ export default function Codigo() {
                 })
             })
                 .then(response => response.json())
-                .then(data => console.log(data))
+                .then(data => {
+                    console.log(data)
+                    limpiarBolosData();
+                    navigate('/hacerregistro/codigo');
+                }
+            )
                 .catch(error => console.error(error));
 
-            limpiarBolosData();
-            navigate('/hacerregistro/codigo');
+
 
         } catch (error) {
             console.error(error);
         };
+
     }
 
 
@@ -236,7 +268,7 @@ export default function Codigo() {
                                     </button>
                                 ) : (
                                     compostera.bolo &&
-                                    <div>
+                                    <div className="flex flex-wrap gap-2 items-center justify-start">
 
                                         <Link to={`/hacerregistro/${compostera.bolo.ciclo_id && compostera.bolo.ciclo_id}`}
                                         >
@@ -254,14 +286,35 @@ export default function Codigo() {
                                         </form>
 
 
-                                        <form onSubmit={descartarbolo} name={compostera.bolo.ciclo_id && compostera.bolo.ciclo_id}
+                                        <form onSubmit={descartarBolo} name={compostera.bolo.ciclo_id && compostera.bolo.ciclo_id}
                                             action={`/api/ciclos/${compostera.bolo.ciclo_id && compostera.bolo.ciclo_id}`}
                                             className="inline-block bg-red-300 hover:bg-red-700 hover:text-white text-green-800 font-bold py-2 px-4 rounded ml-3">
                                             <button type="submit">
                                                 Descartar
                                             </button>
                                         </form>
+
+                                        <ConfirmationModal
+                                            isOpen={isTerminarCicloModalOpen}
+                                            onClose={() => setIsTerminarCicloModalOpen(false)}
+                                            onConfirm={confirmTerminarCiclo}
+                                            title="Terminar Ciclo"
+                                            message="¿Está seguro que desea terminar este ciclo? Esta acción no se puede deshacer."
+                                        />
+
+                                        <ConfirmationModal
+                                            isOpen={isDescartarBoloModalOpen}
+                                            onClose={() => setIsDescartarBoloModalOpen(false)}
+                                            onConfirm={confirmDescartarBolo}
+                                            title="Descartar Sustrato"
+                                            message="¿Está seguro que desea descartar este sustrato? Esta acción no se puede deshacer."
+                                        />
                                     </div>
+
+
+
+
+
                                 )
                             }
 

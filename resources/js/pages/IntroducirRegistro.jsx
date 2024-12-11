@@ -23,19 +23,22 @@ export default function IntroducirRegistro() {
     const id = params && params.code;
     const user = localStorage.getItem('user');
 
+
     useEffect(() => {
 
         setData({
             ...data, registro: {
                 ciclo_id: id && id,
+
                 user: user,
-                fecha_hora: `${new Date().toISOString().split('T')[0]}`,
+                fecha: '',
                 temperatura_ambiental: '',
                 temperatura_compostera: '',
                 nivel_llenado_inicial: '',
                 olor: '',
                 presencia_insectos: '',
                 humedad: '',
+
                 fotografias_iniciales: '',
                 observaciones_iniciales: '',
 
@@ -68,20 +71,24 @@ export default function IntroducirRegistro() {
         setData(eliminarBolos);
     }
 
-
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(data.registro);
+        const formData = new FormData();
+
+        for (const key in data.registro) {
+            console.log(key, data.registro[key]);
+            formData.append(key, data.registro[key]);
+        }
+        console.log(formData);
         try {
             fetch(`${data.url}/api/registros?hacerregistro&ciclo_id=${id}`, {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${token}`,
-                    'Content-Type': 'application/json',
                     'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-                    'enctype': "multipart/form-data"
                 },
-                body: JSON.stringify(data.registro),
+                body: formData,
             })
                 .then(response => response.json())
                 .then(data => console.log(data))
@@ -129,7 +136,8 @@ export default function IntroducirRegistro() {
 
                 {/* Tab Content */}
 
-                <form action="" enctype="multipart/form-data">
+
+                <form action="" encType="multipart/form-data">
                     <div className="bg-white border border-green-300 rounded-lg p-4 shadow-sm">
                         {activeTab === 'Antes' && (
                             <div className="text-center text-green-700">

@@ -9,15 +9,10 @@ use App\Models\Registro;
 
 use App\Models\Ciclo;
 
-use App\Models\AntesDe;
-use App\Models\Durante;
-use App\Models\DespuesDe;
 use App\Queries\RegistroQuery;
 
 
-use Orion\Concerns\DisableAuthorization;
 use Illuminate\Http\Request;
-
 
 class RegistroController extends Controller
 {
@@ -28,10 +23,15 @@ class RegistroController extends Controller
 
         if ($request->has('hacerregistro')) {
 
+            $data = $request->validate([
+                'fotografias_iniciales' => ['nullable','file','image','max:2048'],
+                'fotografias_durante' => ['nullable','file','image','max:2048'],
+                'fotografias_finales' => ['nullable','file','image','max:2048'],
+            ]);
             $ciclo = Ciclo::find($request->ciclo_id);
             $registro = new Registro();
             $registro->fecha_hora = $request->fecha;
-            $registro->users_id = $request->user; // POR ARREGLAR
+            $registro->users_id = $request->user; 
             $registro->inicio_ciclo = 0;
             $registro->ciclos_id = $request->ciclo_id;
             $registro->composteras_id = $ciclo->composteras_id;

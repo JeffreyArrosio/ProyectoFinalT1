@@ -1,7 +1,7 @@
 <x-app-layout>
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-            <div class="p-6 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
+            <div class="p-6 bg-green-200 dark:bg-gray-800 shadow sm:rounded-lg">
                 <div class="w-full">
                     <div class="sm:flex sm:items-center">
                         <div class="sm:flex-auto">

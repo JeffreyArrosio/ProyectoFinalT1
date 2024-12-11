@@ -13,7 +13,7 @@ use App\Models\User;
 
 use Illuminate\Support\Facades\DB;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-
+use Illuminate\Support\Facades\Hash;
 
 use Illuminate\Database\Seeder;
 
@@ -32,7 +32,6 @@ class DatabaseSeeder extends Seeder
 
 
         // Actualizar Informacion Base de datos:         php artisan migrate:fresh --seed
-
         $composterasCodigos = ['11', '22', '33'];
         $primerCentro = Centro::factory()->create([
             'codigo' => 35003630,
@@ -42,11 +41,12 @@ class DatabaseSeeder extends Seeder
             'responsable' => 'director',
         ]);
 
+        $contraseña = Hash::make('01450145');
 
         User::factory()->create([
             'name' => 'Guille',
             'email' => 'gmail@gmail.com',
-            'password' => bcrypt('0145'),
+            'password' => $contraseña ,
             'admin' => 1,
             'centros_id' => $primerCentro->id
         ]);
@@ -60,7 +60,7 @@ class DatabaseSeeder extends Seeder
         User::factory()->create([
             'name' => 'Guille2',
             'email' => 'email2@gmail.com',
-            'password' => bcrypt('0145'),
+            'password' => $contraseña ,
             'admin' => 1,
             'centros_id' => 2,
         ]);
