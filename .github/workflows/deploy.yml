@@ -25,9 +25,7 @@ jobs:
         run: |
           ssh fana5143@200.234.231.250 -p 2222 << 'EOF'
             cd /var/www/html/ProyectoFinalT1
-            git stash push -m "Guardar temporalmente cambios locales"
             git pull origin master
-            git stash pop || echo "No hay cambios en el stash para aplicar"
             composer install --no-dev --optimize-autoloader
             php artisan migrate --force
             php artisan config:cache
