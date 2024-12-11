@@ -14,6 +14,8 @@ export default function (props) {
 
 
 
+    const user = localStorage.getItem('user');
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setData(prevData => ({
@@ -24,6 +26,7 @@ export default function (props) {
             }
         }));
     };
+
 
     const handlePhotoUpload = (e) => {
         const file = e.target.files[0];
@@ -37,6 +40,7 @@ export default function (props) {
         }));
         console.log(data)
     };
+
 
 
     // const handleSubmit = (e) => {
@@ -53,6 +57,7 @@ export default function (props) {
                     <h2 className="text-xl font-bold text-green-700 mb-4 text-center">
                         Registro Inicial
                     </h2>
+ç
                     <div className="grid grid-cols-2 gap-4">
                         <div>
                             <label className="block text-green-700 mb-2">Usuario</label>

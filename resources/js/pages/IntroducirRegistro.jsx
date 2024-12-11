@@ -23,11 +23,13 @@ export default function IntroducirRegistro() {
     const id = params && params.code;
     const user = localStorage.getItem('user');
 
+
     useEffect(() => {
 
         setData({
             ...data, registro: {
                 ciclo_id: id && id,
+
                 user: user,
                 fecha: '',
                 temperatura_ambiental: '',
@@ -36,6 +38,7 @@ export default function IntroducirRegistro() {
                 olor: '',
                 presencia_insectos: '',
                 humedad: '',
+
                 fotografias_iniciales: '',
                 observaciones_iniciales: '',
 
@@ -67,7 +70,6 @@ export default function IntroducirRegistro() {
         }
         setData(eliminarBolos);
     }
-
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -133,6 +135,7 @@ export default function IntroducirRegistro() {
                 </div>
 
                 {/* Tab Content */}
+
 
                 <form action="" encType="multipart/form-data">
                     <div className="bg-white border border-green-300 rounded-lg p-4 shadow-sm">

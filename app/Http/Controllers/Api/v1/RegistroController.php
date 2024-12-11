@@ -18,7 +18,6 @@ use App\Queries\RegistroQuery;
 use Orion\Concerns\DisableAuthorization;
 use Illuminate\Http\Request;
 
-
 class RegistroController extends Controller
 {
     protected $model = Registro::class;
