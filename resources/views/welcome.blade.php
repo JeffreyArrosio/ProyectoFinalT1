@@ -5,8 +5,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta name="auth-token" content="{{  session('token') }}">
     @if (session('token'))
+    <meta name="auth-token" content="{{  session('token') }}">
     <meta name="user" content="{{  session('user')->id }}">
     @endif
 
@@ -30,6 +30,7 @@
         localStorage.setItem('authToken', authToken);
         localStorage.setItem('user', user);
         sessionStorage.clear()
+        location.reload()
     </script>
     @endif
     <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>

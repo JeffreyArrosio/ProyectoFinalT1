@@ -25,8 +25,8 @@ export default function Home() {
 
 
     useEffect(() => {
-        setData({...data, url:"http://proyectofinalt1.test"});
-      }, []);
+        setData({ ...data, url: "http://proyectofinalt1.test" });
+    }, []);
 
       useEffect(() => {
         const fetchData = async () => {
@@ -54,7 +54,7 @@ export default function Home() {
         <div className="min-h-screen bg-green-100 flex items-center justify-center">
             <div className="p-4 space-y-4">
 
-            <Link to="/hacerregistro/codigo">
+                <Link to="/hacerregistro/codigo">
                     <button className={buttonStyle}>
                         <Cuboid className={iconStyle} size={24} />
                         Composteras

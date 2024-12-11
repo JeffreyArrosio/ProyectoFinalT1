@@ -7,11 +7,11 @@ use App\Models\AntesDe;
 use App\Models\Durante;
 use App\Models\DespuesDe;
 use App\Http\Requests\RegistroRequest;
-
+use Illuminate\Http\Request;
 
 class RegistroQuery
 {
-    public function setAntes(Registro $registro, RegistroRequest $request)
+    public function setAntes(Registro $registro, Request $request)
     {
         $antes = new AntesDe();
         $antes->registros_id = $registro->id;
@@ -29,7 +29,7 @@ class RegistroQuery
         return $antes;
     }
 
-    public function setDurante(Registro $registro, RegistroRequest $request)
+    public function setDurante(Registro $registro, Request $request)
     {
         $durante = new Durante();
         $durante->registros_id = $registro->id;
@@ -47,7 +47,7 @@ class RegistroQuery
         return $durante;
     }
 
-    public function setDespues(Registro $registro, RegistroRequest $request)
+    public function setDespues(Registro $registro, Request $request)
     {
         $despues = new DespuesDe();
         $despues->registros_id = $registro->id;

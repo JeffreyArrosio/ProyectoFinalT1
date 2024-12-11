@@ -22,13 +22,19 @@ const FormularioDurante = (props) => {
         }));
     };
 
-    // const handlePhotoUpload = (e) => {
-    //     const files = Array.from(e.target.files);
-    //     setFormData(prev => ({
-    //         ...prev,
-    //         fotografias_durante: files
-    //     }));
-    // };
+    const handlePhotoUpload = (e) => {
+        const file = e.target.files[0];
+        console.log(file);
+        setData(prev => ({
+            ...prev,
+            registro: {
+                ...prev.registro,
+                ['fotografias_durante']: file
+            }
+        }));
+        console.log(data)
+    };
+
 
 
     return (
@@ -120,21 +126,20 @@ const FormularioDurante = (props) => {
                             />
                         </div>
                     </div>
-{/*
                     <div className="grid grid-cols-2 gap-4">
                         <div className="col-span-2 " >
                             <label className="block text-green-700 mb-2">Fotografías</label>
                             <div className="flex items-center  justify-center ">
                                 <input
                                     type="file"
-                                    multiple
+                                    name='fotografias_durante'
                                     onChange={handlePhotoUpload}
-                                    className="hidden"
-                                    id="photoUpload"
-                                    accept="image/*"
+                                    className='hidden'
+                                    id="fotografias_durante"
+                                    accept='image/*'
                                 />
                                 <label
-                                    htmlFor="photoUpload"
+                                    htmlFor="fotografias_durante"
                                     className="flex items-center cursor-pointer bg-green-100 p-2 rounded-lg text-green-700"
                                 >
                                     <Camera size={20} className="mr-2" />
@@ -142,7 +147,7 @@ const FormularioDurante = (props) => {
                                 </label>
                             </div>
                         </div>
-                    </div> */}
+                    </div>
 
                     <div>
                         <label className="block text-green-700 mb-2">Observaciones Durante</label>

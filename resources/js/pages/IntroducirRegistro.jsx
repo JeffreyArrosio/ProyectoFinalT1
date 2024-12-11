@@ -30,19 +30,16 @@ export default function IntroducirRegistro() {
             ...data, registro: {
                 ciclo_id: id && id,
 
-                fecha_hora: `${new Date().toISOString().split('T')[0]}`,
                 user: user,
+                fecha: '',
                 temperatura_ambiental: '',
                 temperatura_compostera: '',
                 nivel_llenado_inicial: '',
                 olor: '',
                 presencia_insectos: '',
                 humedad: '',
-                fotografias_iniciales: [],
 
-
-
-
+                fotografias_iniciales: '',
                 observaciones_iniciales: '',
 
                 riego: '',
@@ -51,10 +48,10 @@ export default function IntroducirRegistro() {
                 tipo_aporte_verde: '',
                 aporte_seco: '',
                 tipo_aporte_seco: '',
-                // fotografias_durante: [],
+                fotografias_durante: '',
                 observaciones_durante: '',
 
-                // fotografias_final: '',
+                fotografias_finales: '',
                 nivel_llenado_final: '',
                 observaciones_final: ''
             }
@@ -76,16 +73,22 @@ export default function IntroducirRegistro() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        console.log(data.registro);
+        const formData = new FormData();
 
+        for (const key in data.registro) {
+            console.log(key, data.registro[key]);
+            formData.append(key, data.registro[key]);
+        }
+        console.log(formData);
         try {
             fetch(`${data.url}/api/registros?hacerregistro&ciclo_id=${id}`, {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${token}`,
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
                 },
-                body: JSON.stringify(data.registro),FormData
+                body: formData,
             })
                 .then(response => response.json())
                 .then(data => console.log(data))
@@ -133,7 +136,8 @@ export default function IntroducirRegistro() {
 
                 {/* Tab Content */}
 
-                <form action="" >
+
+                <form action="" encType="multipart/form-data">
                     <div className="bg-white border border-green-300 rounded-lg p-4 shadow-sm">
                         {activeTab === 'Antes' && (
                             <div className="text-center text-green-700">
