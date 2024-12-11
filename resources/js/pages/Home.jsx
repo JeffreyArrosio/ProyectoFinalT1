@@ -25,7 +25,7 @@ export default function Home() {
 
 
     useEffect(() => {
-        setData({...data, url:"http://yeray.informaticamajada.es/"});
+        setData({...data, url:"https://yeray.informaticamajada.es/"});
       }, []);
 
 
