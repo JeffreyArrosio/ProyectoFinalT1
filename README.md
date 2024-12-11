@@ -134,4 +134,15 @@ DEPLOY_SERVER: Dirección del servidor de despliegue.
 
 DEPLOY_USER: Usuario para el acceso SSH al servidor.
 
+## Usuarios:
+URL: yeray.informaticamajada.es
+Usuarios:
+-Alberto: alberto@prueba.com
+-Jesus: jesus@prueba.com
+-Dani: dani@prueba.com
+-Cesar: cesar@prueba.com
+
+Contraseña:
+-La contraseña es "password" para todos.
+
 Espero que esto te sea útil. Si necesitas más detalles o ajustes específicos, ¡avisadnos! 😊
