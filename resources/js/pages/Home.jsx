@@ -28,7 +28,7 @@ export default function Home() {
         setData({ ...data, url: "http://proyectofinalt1.test" });
     }, []);
 
-      useEffect(() => {
+    useEffect(() => {
         const fetchData = async () => {
 
             try {

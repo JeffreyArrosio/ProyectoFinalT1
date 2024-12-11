@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import BotonModal from './BotonModal';
+import BotonModalFotos from './BotonModalFotos';
 
 const DespuesDe = ({ despues_registros }) => {
     return (
@@ -9,7 +10,7 @@ const DespuesDe = ({ despues_registros }) => {
                     <tr>
                         <th className="px-4 py-2">ID</th>
                         <th className="px-4 py-2">Nivel Llenado Final</th>
-                        {/* <th className="px-4 py-2">Fotografías Finales</th> */}
+                        <th className="px-4 py-2">Fotografías Finales</th>
                         <th className="px-4 py-2">Observaciones Finales</th>
                     </tr>
                 </thead>
@@ -21,16 +22,13 @@ const DespuesDe = ({ despues_registros }) => {
                         >
                             <td className="border px-4 py-2 text-center">{record.id ? record.id : 'N/A'}</td>
                             <td className="border px-4 py-2 text-center">{record.nivel_llenado_final ? record.nivel_llenado_final : 'N/A'}%</td>
-                            {/* <td className="border px-4 py-2 text-center">
-                                <a
-                                    href={record.fotografias_finales}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="text-green-600 hover:underline"
-                                >
-                                    Ver Fotografía
-                                </a>
-                            </td> */}
+                            <td className="border px-4 py-2 text-center">
+                                {record.fotografias_finales ? (
+                                    <BotonModalFotos url={record.fotografias_finales}>Si</BotonModalFotos>
+                                ) : (
+                                    "No"
+                                )}
+                            </td>
                             <td className="border px-4 py-2 text-center">
                                 {record.observaciones_finales ? (
                                     <BotonModal mensaje={record.observaciones_finales}>Si</BotonModal>

@@ -13,9 +13,6 @@ export default function (props) {
     const user = localStorage.getItem('user');
 
 
-
-    const user = localStorage.getItem('user');
-
     const handleChange = (e) => {
         const { name, value } = e.target;
         setData(prevData => ({

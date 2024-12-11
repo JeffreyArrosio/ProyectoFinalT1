@@ -1,5 +1,6 @@
 import React from 'react';
 import BotonModal from './BotonModal';
+import BotonModalFotos from './BotonModalFotos';
 
 const Durante = ({ durante_registros }) => {
     return (
@@ -14,7 +15,7 @@ const Durante = ({ durante_registros }) => {
                         <th className="px-4 py-2">Tipo Aporte Verde</th>
                         <th className="px-4 py-2">Aporte Seco</th>
                         <th className="px-4 py-2">Tipo Aporte Seco</th>
-                        {/* <th className="px-4 py-2">Fotografías</th> */}
+                        <th className="px-4 py-2">Fotografías</th>
                         <th className="px-4 py-2">Observaciones</th>
                     </tr>
                 </thead>
@@ -47,16 +48,13 @@ const Durante = ({ durante_registros }) => {
                                     "No"
                                 )}
                             </td>
-                            {/* <td className="border px-4 py-2 text-center">
-                                <a
-                                    href={record.fotografias_durante}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="text-green-600 hover:underline"
-                                >
-                                    Ver Fotografía
-                                </a>
-                            </td> */}
+                            <td className="border px-4 py-2 text-center">
+                                {record.fotografias_durante ? (
+                                    <BotonModalFotos url={record.fotografias_durante}>Si</BotonModalFotos>
+                                ) : (
+                                    "No"
+                                )}
+                            </td>
                             <td className="border px-4 py-2 text-center">
                                 {record.observaciones_durante ? (
                                     <BotonModal mensaje={record.observaciones_durante}>Si</BotonModal>

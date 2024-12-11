@@ -63,7 +63,7 @@ export default function Estadisticas() {
                         </div>
                     </Link>
                 ))}
-                      <button
+                    <button
             onClick={handleBack}
             className="fixed bottom-4 left-4 right-4 flex items-center justify-center py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
         >
