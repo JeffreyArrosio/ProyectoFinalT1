@@ -10,7 +10,6 @@ Route::get('/', function () {
     return view('welcome');
 })->middleware(['auth:sanctum'])->name('welcome');
 
-Route::post('/registro',[RegistroController::class, 'store']);
 
 Route::resource('users', UserController::class)->middleware('can:administrate,App\Models\User'); // Ruta para el CRUD de usuarios(Admin).
 
