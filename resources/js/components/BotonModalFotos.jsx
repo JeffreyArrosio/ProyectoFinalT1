@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+// import { data } from 'alpinejs';
+import { useState, useContext } from 'react';
+import { DataContext } from '../DataContext';
 
-const BotonModal = ({ mensaje, children }) => {
+const BotonModal = ({ url, children }) => {
     const [isOpen, setIsOpen] = useState(false);
-
+    const { data, setData } = useContext(DataContext);
     const openModal = () => setIsOpen(true);
     const closeModal = () => setIsOpen(false);
 
@@ -40,7 +42,7 @@ const BotonModal = ({ mensaje, children }) => {
                                 </svg>
                             </button>
                         </div>
-                        <p className="text-gray-700">{mensaje}</p>
+                        <img src={data.url + '/storage/' + url} alt="" />
                         <div className="mt-4 flex justify-end">
                             <button
                                 onClick={closeModal}
