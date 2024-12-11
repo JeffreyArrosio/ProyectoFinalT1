@@ -46,7 +46,7 @@ class BoloController extends Controller
         //     $ciclo->save();
 
         //     return response()->json($bolos);
-        }
+        // }
     }
 
     /**
