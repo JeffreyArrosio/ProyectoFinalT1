@@ -64,3 +64,74 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+## Descripción del Proyecto
+
+Este proyecto es una aplicación web diseñada para gestionar datos y procesos relacionados con el compostaje en un centro educativo.
+
+### Funcionalidades principales:
+
+### Tecnologías Utilizadas
+
+- **Frontend**: React
+- **Backend**: Laravel con **Orion** para las APIs.
+- **Base de Datos**: MySQL
+- **Servidor Web**: Nginx
+- **Automatización de despliegue**: GitHub Actions
+- **Despliegue**: Configuración manual en VPS
+
+---
+
+## Instalación y Ejecución
+
+### Requisitos Previos
+
+1. **Node.js** y **npm** instalados.
+2. **Composer** para gestionar dependencias de Laravel.
+3. **Base de datos MySQL** configurada.
+4. Servidor con **PHP 8.3** y **Nginx**.
+
+### Pasos para Instalar
+
+1. Clona el repositorio:
+   ```bash
+   git clone git@github.com:JeffreyArrosio/ProyectoFinalT1.git
+   cd ProyectoFinalT1
+2. Instala dependencias:
+   ```bash
+   npm install
+   composer install
+3. Configura el archivo .env:
+   ```bash
+   cp .env.example .env
+   #Edita las credenciales según tu configuración local.
+4. Genera la clave de la aplicación:
+   ```bash
+   php artisan key:generate
+5. Ejecuta las migraciones:
+   ```bash
+   php artisan migrate
+6. Inicia el servidor de desarrollo:
+   ```bash
+   npm run dev
+   php artisan serve
+   #Si usas Laragon inicialo y luego haces un npm run dev.
+
+## Automatización
+
+Este proyecto utiliza GitHub Actions para automatizar el flujo de trabajo de desarrollo. El archivo de configuración se encuentra en .github/workflows/deploy.yml y realiza las siguientes tareas:
+
+Ejecutar pruebas automáticamente en cada push o pull request.
+
+Construir y desplegar la aplicación en el servidor de producción.
+
+### Configuración de GitHub Actions
+Asegúrate de configurar las siguientes variables de entorno en tu repositorio de GitHub:
+
+SSH_PRIVATE_KEY: Clave privada SSH para acceder al servidor.
+
+DEPLOY_SERVER: Dirección del servidor de despliegue.
+
+DEPLOY_USER: Usuario para el acceso SSH al servidor.
+
+Espero que esto te sea útil. Si necesitas más detalles o ajustes específicos, ¡avisadnos! 😊
