@@ -25,7 +25,7 @@ export default function Home() {
 
 
     useEffect(() => {
-        setData({ ...data, url: "http://proyectofinalt1.test" });
+         setData({...data, url:"https://yeray.informaticamajada.es/"});
     }, []);
 
     useEffect(() => {
@@ -48,6 +48,7 @@ export default function Home() {
 
         fetchData();
     }, [cargadoTodo]);
+
 
 
     return (
