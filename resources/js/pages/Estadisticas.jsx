@@ -15,7 +15,7 @@ export default function Estadiscas() {
 
     useEffect(() => {
         if(!data.bolos){
-            fetch('https://yeray.informaticamajada.es/api/bolos?registros',{
+            fetch('http://yeray.informaticamajada.es/api/bolos?registros',{
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${token}`,
